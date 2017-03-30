@@ -1,2 +1,3 @@
-# CoreAPM
-.NET Core Application Performance Monitoring
+# CoreAPM .NET Agent
+
+(details coming soon)
