@@ -1,4 +1,4 @@
-dist: xenial
+dist: trusty
 language: csharp
 dotnet: 1.0.1
 mono: none
