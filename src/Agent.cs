@@ -18,9 +18,9 @@ namespace CoreAPM.DotNet.Agent
             _addEventURL = new Uri(config.EventsAPI + (config.EventsAPI.ToString().EndsWith("/") ? "add" : "/add"));
         }
 
-        public static void GetJSON(Event e) => new StringContent(JObject.FromObject(e).ToString());
+        public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());
 
-        public virtual void Send(Event e) => _httpClient.PostAsync(_addEventURL, GetJSON(e));
+        public virtual void Send(Event e) => _httpClient.PostAsync(_addEventURL, GetPostContent(e));
 
         public virtual void Dispose()
         {

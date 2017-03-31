@@ -87,10 +87,10 @@ namespace CoreAPM.DotNet.Agent.Tests
         public async Task EventCanConvertToJSON()
         {
             //arrange
-            var e = new Event {Action = "a1"};
+            var e = new Event { Action = "a1" };
 
             //act
-            var json = Agent.GetJSON(e);
+            var json = await Agent.GetPostContent(e).ReadAsStringAsync();
 
             //assert
             Assert.Equal("a1", JObject.Parse(json)["Action"]);
