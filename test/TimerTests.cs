@@ -42,14 +42,14 @@ namespace CoreAPM.DotNet.Agent.Tests
             var stopwatch = Substitute.For<Stopwatch>();
             var timer = new Timer(stopwatch);
             timer.Start();
-            Thread.Sleep(1);
+            Thread.Sleep(5);
             timer.Stop();
 
             //act
             var result = timer.CurrentTime;
 
             //assert
-            Assert.Equal(1, result);
+            Assert.InRange(result, 5, 7);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace CoreAPM.DotNet.Agent.Tests
             var result = timer.Time(() => Thread.Sleep(5));
 
             //assert
-            Assert.True(result > 5);
+            Assert.InRange(result, 5, 7);
         }
     }
 }
