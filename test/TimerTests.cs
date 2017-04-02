@@ -60,10 +60,10 @@ namespace CoreAPM.DotNet.Agent.Tests
             var timer = new Timer(stopwatch);
 
             //act
-            var result = timer.Time(() => Thread.Sleep(1));
+            var result = timer.Time(() => Thread.Sleep(5));
 
             //assert
-            Assert.InRange(result, 1, 2);
+            Assert.True(result > 5);
         }
     }
 }
