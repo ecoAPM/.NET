@@ -25,10 +25,10 @@ namespace CoreAPM.DotNet.Agent
         {
             while (_alive)
             {
+                Thread.Sleep(_sendInterval);
                 var eventsToSend = GetEventsToSend();
                 if (eventsToSend.Any())
                     await SendEvents(eventsToSend);
-                Thread.Sleep(_sendInterval);
             }
         }
 
