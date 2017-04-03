@@ -1,7 +1,9 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using CoreAPM.DotNet.Agent;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 using NSubstitute;
 using Xunit;
 
@@ -27,13 +29,22 @@ namespace CoreAPM.DotNet.ASPNETCoreMiddleware.Tests
         {
             //arrange
             var app = Substitute.For<IApplicationBuilder>();
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var baseConfig = new ConfigurationBuilder();
+            var configSource = new MemoryConfigurationSource
+            {
+                InitialData = new Dictionary<string, string>
+                {
+                    {"CoreAPM:EventsAPI", "http://localhost"},
+                    {"CoreAPM:APIKey", Guid.NewGuid().ToString()}
+                }
+            };
+            baseConfig.Add(configSource);
 
             //act
-            app.UseCoreAPM(config);
+            app.UseCoreAPM(baseConfig.Build());
 
             //assert
-            app.Received().UseMiddleware<CoreAPMMiddleware>(config);
+            app.Received().UseMiddleware<CoreAPMMiddleware>(Arg.Any<IConfig>());
         }
     }
 }
