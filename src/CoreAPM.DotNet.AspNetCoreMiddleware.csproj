@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PackageId>src</PackageId>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
+    <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware</RootNamespace>
+    <ApplicationIcon />
+    <OutputTypeEx>library</OutputTypeEx>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreAPM.Dotnet.Agent" Version="0.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+
+</Project>
