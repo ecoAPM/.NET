@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <PackageId>test</PackageId>
     <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
+    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
     <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware.Tests</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
