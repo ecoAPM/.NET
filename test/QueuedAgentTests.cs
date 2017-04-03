@@ -109,7 +109,7 @@ namespace CoreAPM.DotNet.Agent.Tests
             agent.Send(new Event());
 
             //act
-            Thread.Sleep(1);
+            Thread.Sleep(5);
 
             //assert
             httpClient.ReceivedWithAnyArgs().PostAsync(Arg.Any<Uri>(), Arg.Any<HttpContent>());

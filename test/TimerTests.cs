@@ -49,7 +49,7 @@ namespace CoreAPM.DotNet.Agent.Tests
             var result = timer.CurrentTime;
 
             //assert
-            Assert.InRange(result, 5, 7);
+            Assert.InRange(result, 5, 10);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace CoreAPM.DotNet.Agent.Tests
             var result = timer.Time(() => Thread.Sleep(5));
 
             //assert
-            Assert.InRange(result, 5, 7);
+            Assert.InRange(result, 5, 10);
         }
     }
 }

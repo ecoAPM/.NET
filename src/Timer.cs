@@ -22,6 +22,6 @@ namespace CoreAPM.DotNet.Agent
 
         public void Start() => _stopwatch.Start();
         public void Stop() => _stopwatch.Stop();
-        public double CurrentTime => _stopwatch.Elapsed.Milliseconds;
+        public double CurrentTime => _stopwatch.Elapsed.TotalMilliseconds;
     }
 }
