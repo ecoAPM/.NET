@@ -18,7 +18,7 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
             var timer = Substitute.For<ITimer>();
             var agent = Substitute.For<IAgent>();
             var context = Substitute.For<HttpContext>();
-            var middleware = new CoreAPMMiddleware(next, agent, timer);
+            var middleware = new CoreAPMMiddleware(next, agent, () => timer);
 
             //act
             await middleware.Invoke(context);
@@ -35,7 +35,7 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
             var timer = Substitute.For<ITimer>();
             var agent = Substitute.For<IAgent>();
             var context = Substitute.For<HttpContext>();
-            var middleware = new CoreAPMMiddleware(next, agent, timer);
+            var middleware = new CoreAPMMiddleware(next, agent, () => timer);
 
             //act
             await middleware.Invoke(context);
@@ -55,7 +55,7 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
             var time = 0.0;
             timer.CurrentTime.Returns(123);
             agent.When(a => a.Send(Arg.Any<Event>())).Do(c => time = ((Event)c.Args().First()).Length);
-            var middleware = new CoreAPMMiddleware(next, agent, timer);
+            var middleware = new CoreAPMMiddleware(next, agent, () => timer);
 
             //act
             await middleware.Invoke(context);

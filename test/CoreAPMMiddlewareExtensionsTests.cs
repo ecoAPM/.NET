@@ -23,28 +23,5 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
             //assert
             app.Received().UseMiddleware<CoreAPMMiddleware>();
         }
-
-        [Fact]
-        public void CanCreateWithConfig()
-        {
-            //arrange
-            var app = Substitute.For<IApplicationBuilder>();
-            var baseConfig = new ConfigurationBuilder();
-            var configSource = new MemoryConfigurationSource
-            {
-                InitialData = new Dictionary<string, string>
-                {
-                    {"CoreAPM:EventsAPI", "http://localhost"},
-                    {"CoreAPM:APIKey", Guid.NewGuid().ToString()}
-                }
-            };
-            baseConfig.Add(configSource);
-
-            //act
-            app.UseCoreAPM(baseConfig.Build());
-
-            //assert
-            app.Received().UseMiddleware<CoreAPMMiddleware>(Arg.Any<IConfig>());
-        }
     }
 }
