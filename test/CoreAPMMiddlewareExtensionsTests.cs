@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration.Memory;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.ASPNETCoreMiddleware.Tests
+namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
 {
     public class CoreAPMMiddlewareExtensionsTests
     {
