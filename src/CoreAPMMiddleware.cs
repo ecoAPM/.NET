@@ -10,11 +10,11 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware
     {
         private readonly RequestDelegate _next;
         private readonly IAgent _agent;
-        private readonly ITimer _timer;
+        private readonly Func<ITimer> newTimer;
 
-        public CoreAPMMiddleware(RequestDelegate next, IAgent agent, ITimer timer)
+        public CoreAPMMiddleware(RequestDelegate next, IAgent agent, Func<ITimer> timerFac)
         {
-            _timer = timer;
+            newTimer = timerFac;
             _next = next;
             _agent = agent;
         }
@@ -37,10 +37,11 @@ namespace CoreAPM.DotNet.AspNetCoreMiddleware
 
         private async Task<double> getRequestTime(HttpContext httpContext)
         {
-            _timer.Start();
+            var timer = newTimer();
+            timer.Start();
             await _next.Invoke(httpContext);
-            _timer.Stop();
-            return _timer.CurrentTime;
+            timer.Stop();
+            return timer.CurrentTime;
         }
     }
 }
