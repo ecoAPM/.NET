@@ -5,13 +5,20 @@
     <DebugType>portable</DebugType>
     <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware</AssemblyName>
     <OutputType>Library</OutputType>
-    <PackageId>src</PackageId>
+    <PackageId>CoreAPM.DotNet.ASPNETCoreMiddleware</PackageId>
     <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
     <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Version>0.1.1</Version>
+    <Authors>Steve Desmond</Authors>
+    <Company>CoreAPM</Company>
+    <Description />
+    <Product>CoreAPM ASP.NET Core Middleware</Product>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
