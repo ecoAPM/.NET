@@ -4,7 +4,7 @@
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>CoreAPM.DotNet.Agent</AssemblyName>
     <RootNamespace>CoreAPM.DotNet.Agent</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Steve Desmond</Authors>
     <Company>CoreAPM</Company>
     <Product>CoreAPM .NET Agent</Product>
