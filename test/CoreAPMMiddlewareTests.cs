@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.ASPNETCoreMiddleware.Tests
+namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
 {
     public class CoreAPMMiddlewareTests
     {

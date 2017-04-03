@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 
-namespace CoreAPM.DotNet.ASPNETCoreMiddleware
+namespace CoreAPM.DotNet.AspNetCoreMiddleware
 {
     public static class CoreAPMMiddlewareExtensions
     {

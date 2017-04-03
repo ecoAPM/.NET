@@ -4,7 +4,7 @@ using CoreAPM.DotNet.Agent;
 using CoreAPM.Events.Model;
 using Microsoft.AspNetCore.Http;
 
-namespace CoreAPM.DotNet.ASPNETCoreMiddleware
+namespace CoreAPM.DotNet.AspNetCoreMiddleware
 {
     public class CoreAPMMiddleware
     {

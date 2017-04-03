@@ -2,7 +2,7 @@ using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace CoreAPM.DotNet.ASPNETCoreMiddleware.Tests
+namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
 {
     public class CoreAPMServicesExtensionsTests
     {
