@@ -6,7 +6,6 @@
     <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware.Tests</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>test</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware.Tests</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
