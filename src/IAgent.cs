@@ -1,5 +1,4 @@
 ﻿using System;
-using CoreAPM.Events.Model;
 
 namespace CoreAPM.DotNet.Agent
 {

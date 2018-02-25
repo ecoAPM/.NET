@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using CoreAPM.Events.Model;
 using Newtonsoft.Json.Linq;
 
 namespace CoreAPM.DotNet.Agent

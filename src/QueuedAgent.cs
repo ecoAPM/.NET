@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using CoreAPM.Events.Model;
 using Newtonsoft.Json.Linq;
 
 namespace CoreAPM.DotNet.Agent
@@ -32,10 +32,7 @@ namespace CoreAPM.DotNet.Agent
             }
         }
 
-        public IList<Event> GetEventsToSend()
-        {
-            return _eventQueue.ToList();
-        }
+        public IList<Event> GetEventsToSend() => _eventQueue.ToList();
 
         public async Task SendEvents(ICollection<Event> eventsToSend)
         {
@@ -44,10 +41,7 @@ namespace CoreAPM.DotNet.Agent
             _eventQueue.RemoveAll(eventsToSend.Contains);
         }
 
-        public static HttpContent GetPostContent(IEnumerable<Event> eventsToSend)
-        {
-            return new StringContent(JArray.FromObject(eventsToSend).ToString());
-        }
+        public static HttpContent GetPostContent(IEnumerable<Event> eventsToSend) => new StringContent(JArray.FromObject(eventsToSend).ToString(), Encoding.UTF8, "application/json");
 
         public override void Send(Event e) => _eventQueue.Add(e);
 
