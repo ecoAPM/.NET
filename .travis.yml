@@ -1,6 +1,6 @@
-dist: trusty
+dist: xenial
 language: csharp
-dotnet: 1.0.1
+dotnet: 2.1.4
 mono: none
 
 script:
