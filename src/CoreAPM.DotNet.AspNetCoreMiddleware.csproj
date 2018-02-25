@@ -6,8 +6,6 @@
     <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>CoreAPM.DotNet.ASPNETCoreMiddleware</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <RuntimeFrameworkVersion>1.1.0</RuntimeFrameworkVersion>
     <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
