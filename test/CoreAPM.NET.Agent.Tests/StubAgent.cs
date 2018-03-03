@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using CoreAPM.Events.Model;
 
-namespace CoreAPM.DotNet.Agent.Tests
+namespace CoreAPM.NET.Agent.Tests
 {
     public class StubAgent : Agent
     {

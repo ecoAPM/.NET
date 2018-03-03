@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace CoreAPM.DotNet.Agent
+namespace CoreAPM.NET.Agent
 {
     public class Config : IConfig
     {

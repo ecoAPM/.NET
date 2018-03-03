@@ -1,12 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using CoreAPM.DotNet.Agent;
-using CoreAPM.Events.Model;
+using CoreAPM.NET.Agent;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
+namespace CoreAPM.NET.CoreMiddleware.Tests
 {
     public class CoreAPMMiddlewareTests
     {

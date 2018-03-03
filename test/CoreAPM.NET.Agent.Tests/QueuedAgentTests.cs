@@ -3,12 +3,11 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using CoreAPM.Events.Model;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.Agent.Tests
+namespace CoreAPM.NET.Agent.Tests
 {
     public class QueuedAgentTests
     {

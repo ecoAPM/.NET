@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware
+namespace CoreAPM.NET.CoreMiddleware
 {
     public static class CoreAPMMiddlewareExtensions
     {

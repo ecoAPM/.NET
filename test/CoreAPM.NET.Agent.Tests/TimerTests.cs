@@ -3,7 +3,7 @@ using System.Threading;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.Agent.Tests
+namespace CoreAPM.NET.Agent.Tests
 {
     public class TimerTests
     {

@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>portable</DebugType>
-    <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware</AssemblyName>
+    <AssemblyName>CoreAPM.NET.CoreMiddleware</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>CoreAPM.DotNet.ASPNETCoreMiddleware</PackageId>
-    <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware</RootNamespace>
+    <RootNamespace>CoreAPM.NET.CoreMiddleware</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
@@ -20,11 +20,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CoreAPM.Dotnet.Agent" Version="0.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreAPM.NET.Agent\CoreAPM.NET.Agent.csproj" />
   </ItemGroup>
 
 </Project>

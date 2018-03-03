@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace CoreAPM.DotNet.Agent
+namespace CoreAPM.NET.Agent
 {
     public class Timer : ITimer
     {

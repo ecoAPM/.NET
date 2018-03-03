@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
+namespace CoreAPM.NET.CoreMiddleware.Tests
 {
     public class CoreAPMServicesExtensionsTests
     {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Memory;
 using Xunit;
 
-namespace CoreAPM.DotNet.Agent.Tests
+namespace CoreAPM.NET.Agent.Tests
 {
     public class ConfigTests
     {
