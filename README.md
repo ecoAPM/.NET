@@ -1,4 +1,3 @@
-# CoreAPM .NET Agent [![Build Status](https://travis-ci.org/CoreAPM/DotNetAgent.svg?branch=master)](https://travis-ci.org/CoreAPM/DotNetAgent)
-# CoreAPM ASP.NET Core Middleware [![Build Status](https://travis-ci.org/CoreAPM/AspNetCoreMiddleware.svg?branch=master)](https://travis-ci.org/CoreAPM/AspNetCoreMiddleware)
+# CoreAPM .NET Agent and ASP.NET Core Middleware [![Build Status](https://travis-ci.org/CoreAPM/.NET.svg?branch=master)](https://travis-ci.org/CoreAPM/.NET)
 
 (details coming soon)
