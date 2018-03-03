@@ -6,4 +6,4 @@ mono: none
 script:
 - dotnet restore
 - dotnet build
-- find test | grep \\.csproj$ | xargs dotnet test
+- find test | grep \\.csproj$ | xargs -I % dotnet test %
