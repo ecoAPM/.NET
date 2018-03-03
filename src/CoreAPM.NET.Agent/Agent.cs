@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
-namespace CoreAPM.DotNet.Agent
+namespace CoreAPM.NET.Agent
 {
     public class Agent : IAgent
     {

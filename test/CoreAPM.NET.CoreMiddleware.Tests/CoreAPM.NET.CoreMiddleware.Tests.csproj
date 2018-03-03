@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DebugType>portable</DebugType>
-    <AssemblyName>CoreAPM.DotNet.ASPNETCoreMiddleware.Tests</AssemblyName>
+    <AssemblyName>CoreAPM.NET.CoreMiddleware.Tests</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>test</PackageId>
-    <RootNamespace>CoreAPM.DotNet.ASPNETCoreMiddleware.Tests</RootNamespace>
+    <RootNamespace>CoreAPM.NET.CoreMiddleware.Tests</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\CoreAPM.DotNet.AspNetCoreMiddleware.csproj" />
+    <ProjectReference Include="..\..\src\CoreAPM.NET.CoreMiddleware\CoreAPM.NET.CoreMiddleware.csproj" />
   </ItemGroup>
 
   <ItemGroup>

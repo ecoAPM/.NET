@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>CoreAPM.DotNet.Agent</AssemblyName>
-    <RootNamespace>CoreAPM.DotNet.Agent</RootNamespace>
+    <AssemblyName>CoreAPM.NET.Agent</AssemblyName>
+    <RootNamespace>CoreAPM.NET.Agent</RootNamespace>
     <Version>0.1.1</Version>
     <Authors>Steve Desmond</Authors>
     <Company>CoreAPM</Company>

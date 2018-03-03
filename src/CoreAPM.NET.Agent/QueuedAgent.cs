@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace CoreAPM.DotNet.Agent
+namespace CoreAPM.NET.Agent
 {
     public class QueuedAgent : Agent
     {

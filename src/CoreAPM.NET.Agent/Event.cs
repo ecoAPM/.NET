@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreAPM.DotNet.Agent
+namespace CoreAPM.NET.Agent
 {
     public class Event
     {

@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using CoreAPM.DotNet.Agent;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Memory;
 using NSubstitute;
 using Xunit;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware.Tests
+namespace CoreAPM.NET.CoreMiddleware.Tests
 {
     public class CoreAPMMiddlewareExtensionsTests
     {

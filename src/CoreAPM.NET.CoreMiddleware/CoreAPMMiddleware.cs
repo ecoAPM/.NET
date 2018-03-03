@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using CoreAPM.DotNet.Agent;
-using CoreAPM.Events.Model;
+using CoreAPM.NET.Agent;
 using Microsoft.AspNetCore.Http;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware
+namespace CoreAPM.NET.CoreMiddleware
 {
     public class CoreAPMMiddleware
     {

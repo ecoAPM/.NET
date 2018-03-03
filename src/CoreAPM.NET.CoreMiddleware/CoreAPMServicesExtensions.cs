@@ -1,10 +1,10 @@
 using System;
 using System.Net.Http;
-using CoreAPM.DotNet.Agent;
+using CoreAPM.NET.Agent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreAPM.DotNet.AspNetCoreMiddleware
+namespace CoreAPM.NET.CoreMiddleware
 {
     public static class CoreAPMServicesExtensions
     {
