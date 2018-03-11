@@ -14,7 +14,7 @@ namespace CoreAPM.NET.Agent
         {
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", config.APIKey.ToString().ToLower());
-            _addEventURL = new Uri(config.EventsAPI + (config.EventsAPI.ToString().EndsWith("/") ? "add" : "/add"));
+            _addEventURL = new Uri(config.BaseURL + (config.BaseURL.ToString().EndsWith("/") ? "events" : "/events"));
         }
 
         public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());

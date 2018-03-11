@@ -20,7 +20,7 @@ namespace CoreAPM.NET.Agent.Tests
             var agent = new StubAgent(config, httpClient);
 
             //assert
-            Assert.Equal("http://localhost/add", agent.AddEventURL.AbsoluteUri);
+            Assert.Equal("http://localhost/events", agent.AddEventURL.AbsoluteUri);
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace CoreAPM.NET.Agent.Tests
             var agent = new StubAgent(config, httpClient);
 
             //assert
-            Assert.Equal("http://localhost/add", agent.AddEventURL.AbsoluteUri);
+            Assert.Equal("http://localhost/events", agent.AddEventURL.AbsoluteUri);
         }
 
         [Fact]

@@ -4,7 +4,7 @@ namespace CoreAPM.NET.Agent
 {
     public interface IConfig
     {
-        Uri EventsAPI { get; }
+        Uri BaseURL { get; }
         Guid APIKey { get; }
     }
 }

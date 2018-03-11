@@ -5,29 +5,29 @@ namespace CoreAPM.NET.Agent
 {
     public class Config : IConfig
     {
-        public Uri EventsAPI { get; }
+        public Uri BaseURL { get; }
         public Guid APIKey { get; }
 
         public Config()
-            : this(Environment.GetEnvironmentVariable("CoreAPM_EventsAPI"),
+            : this(Environment.GetEnvironmentVariable("CoreAPM_BaseURL"),
                 Environment.GetEnvironmentVariable("CoreAPM_APIKey"))
         {
         }
 
         public Config(IConfiguration config)
-            : this(config["CoreAPM:EventsAPI"] ?? config["CoreAPM_EventsAPI"],
+            : this(config["CoreAPM:BaseURL"] ?? config["CoreAPM_BaseURL"],
                   config["CoreAPM:APIKey"] ?? config["CoreAPM_APIKey"])
         {
         }
 
-        public Config(string eventsAPI, string apiKey)
-            : this(new Uri(eventsAPI), new Guid(apiKey))
+        public Config(string baseURL, string apiKey)
+            : this(new Uri(baseURL), new Guid(apiKey))
         {
         }
 
-        public Config(Uri eventsAPI, Guid apiKey)
+        public Config(Uri baseURL, Guid apiKey)
         {
-            EventsAPI = eventsAPI;
+            BaseURL = baseURL;
             APIKey = apiKey;
         }
     }
