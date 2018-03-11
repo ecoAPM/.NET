@@ -14,14 +14,14 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var url = "http://localhost/123";
             var apiKey = Guid.NewGuid();
-            Environment.SetEnvironmentVariable("CoreAPM_EventsAPI", url);
+            Environment.SetEnvironmentVariable("CoreAPM_BaseURL", url);
             Environment.SetEnvironmentVariable("CoreAPM_APIKey", apiKey.ToString());
 
             //act
             var config = new Config();
 
             //assert
-            Assert.Equal(url, config.EventsAPI.AbsoluteUri);
+            Assert.Equal(url, config.BaseURL.AbsoluteUri);
             Assert.Equal(apiKey, config.APIKey);
         }
 
@@ -36,7 +36,7 @@ namespace CoreAPM.NET.Agent.Tests
             var config = new Config(url, apiKey.ToString());
 
             //assert
-            Assert.Equal(url, config.EventsAPI.AbsoluteUri);
+            Assert.Equal(url, config.BaseURL.AbsoluteUri);
             Assert.Equal(apiKey, config.APIKey);
         }
 
@@ -51,7 +51,7 @@ namespace CoreAPM.NET.Agent.Tests
             var config = new Config(url, apiKey);
 
             //assert
-            Assert.Equal(url, config.EventsAPI);
+            Assert.Equal(url, config.BaseURL);
             Assert.Equal(apiKey, config.APIKey);
         }
 
@@ -66,7 +66,7 @@ namespace CoreAPM.NET.Agent.Tests
             {
                 InitialData = new Dictionary<string, string>
                 {
-                    {"CoreAPM_EventsAPI", url},
+                    {"CoreAPM_BaseURL", url},
                     {"CoreAPM_APIKey", apiKey.ToString()}
                 }
             };
@@ -76,7 +76,7 @@ namespace CoreAPM.NET.Agent.Tests
             var config = new Config(baseConfig.Build());
 
             //assert
-            Assert.Equal(url, config.EventsAPI.AbsoluteUri);
+            Assert.Equal(url, config.BaseURL.AbsoluteUri);
             Assert.Equal(apiKey, config.APIKey);
         }
 
@@ -91,7 +91,7 @@ namespace CoreAPM.NET.Agent.Tests
             {
                 InitialData = new Dictionary<string, string>
                 {
-                    {"CoreAPM:EventsAPI", url},
+                    {"CoreAPM:BaseURL", url},
                     {"CoreAPM:APIKey", apiKey.ToString()}
                 }
             };
@@ -101,7 +101,7 @@ namespace CoreAPM.NET.Agent.Tests
             var config = new Config(baseConfig.Build());
 
             //assert
-            Assert.Equal(url, config.EventsAPI.AbsoluteUri);
+            Assert.Equal(url, config.BaseURL.AbsoluteUri);
             Assert.Equal(apiKey, config.APIKey);
         }
     }

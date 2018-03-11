@@ -33,7 +33,7 @@ namespace CoreAPM.NET.CoreMiddleware.Tests
             {
                 InitialData = new Dictionary<string, string>
                 {
-                    {"CoreAPM:EventsAPI", "http://localhost"},
+                    {"CoreAPM:BaseURL", "http://localhost"},
                     {"CoreAPM:APIKey", Guid.NewGuid().ToString()}
                 }
             };
