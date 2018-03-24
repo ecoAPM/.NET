@@ -1,9 +1,9 @@
 dist: xenial
 language: csharp
-dotnet: 2.1.4
+dotnet: 2.1.101
 mono: none
 
 script:
 - dotnet restore
 - dotnet build
-- find test | grep \\.csproj$ | xargs -I % dotnet test %
+- find | grep \\.Tests\\.csproj$ | xargs -I % dotnet test %
