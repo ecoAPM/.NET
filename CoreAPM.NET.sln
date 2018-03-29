@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAPM.NET.CoreMiddleware"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAPM.NET.CoreMiddleware.Tests", "CoreAPM.NET.CoreMiddleware.Tests\CoreAPM.NET.CoreMiddleware.Tests.csproj", "{022D5FF6-6D11-48E0-A470-6C431B9608DD}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreAPM.NET.TestApp", "CoreAPM.NET.TestApp\CoreAPM.NET.TestApp.csproj", "{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{022D5FF6-6D11-48E0-A470-6C431B9608DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{022D5FF6-6D11-48E0-A470-6C431B9608DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{022D5FF6-6D11-48E0-A470-6C431B9608DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
