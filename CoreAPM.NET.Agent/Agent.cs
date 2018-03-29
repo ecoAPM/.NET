@@ -10,11 +10,11 @@ namespace CoreAPM.NET.Agent
         protected readonly HttpClient _httpClient;
         protected readonly Uri _addEventURL;
 
-        public Agent(IConfig config, HttpClient httpClient)
+        public Agent(IServerConfig config, HttpClient httpClient)
         {
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", config.APIKey.ToString().ToLower());
-            _addEventURL = new Uri(config.BaseURL + (config.BaseURL.ToString().EndsWith("/") ? "events" : "/events"));
+            _addEventURL = new Uri(config.BaseURL + "events");
         }
 
         public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());
