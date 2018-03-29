@@ -5,25 +5,30 @@
     <DebugType>portable</DebugType>
     <AssemblyName>CoreAPM.NET.CoreMiddleware</AssemblyName>
     <OutputType>Library</OutputType>
-    <PackageId>CoreAPM.DotNet.ASPNETCoreMiddleware</PackageId>
+    <PackageId>CoreAPM.NET.CoreMiddleware</PackageId>
     <RootNamespace>CoreAPM.NET.CoreMiddleware</RootNamespace>
     <ApplicationIcon />
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Version>0.1.1</Version>
+    <Version>0.2.0</Version>
     <Authors>Steve Desmond</Authors>
-    <Company>CoreAPM</Company>
-    <Description />
-    <Product>CoreAPM ASP.NET Core Middleware</Product>
+    <Company>CoreAPM LLC</Company>
+    <Description>CoreAPM ASP.NET Core Middleware</Description>
+    <Product>CoreAPM</Product>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/CoreAPM/.NET</RepositoryUrl>
+    <PackageProjectUrl>https://CoreAPM.org/</PackageProjectUrl>
+    <Copyright>CoreAPM LLC</Copyright>
+    <PackageLicenseUrl>https://github.com/CoreAPM/.NET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://CoreAPM.org/logo-square.png</PackageIconUrl>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
