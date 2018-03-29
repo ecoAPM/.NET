@@ -3,21 +3,19 @@ using System.Net.Http;
 using CoreAPM.NET.Agent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CoreAPM.NET.CoreMiddleware
 {
     public static class CoreAPMServicesExtensions
     {
-        public static void AddCoreAPM(this IServiceCollection services, IConfiguration config = null)
+        public static void AddCoreAPM(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<CoreAPMMiddleware>();
-            services.AddTransient<HttpClient>();
-            services.AddTransient<IAgent, QueuedAgent>();
-            services.AddTransient<IConfig, Config>();
-            services.AddTransient<Func<ITimer>>(t => () => new Timer());
-
-            if (config != null)
-                services.AddTransient(c => config);
+            services.TryAddTransient<CoreAPMMiddleware>();
+            services.TryAddTransient<HttpClient>();
+            services.TryAddTransient<IAgent, QueuedAgent>();
+            services.TryAddTransient<IServerConfig>(sp => new ServerConfig(configuration));
+            services.TryAddTransient<Func<ITimer>>(t => () => new Timer());
         }
     }
 }
