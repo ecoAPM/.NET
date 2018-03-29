@@ -28,6 +28,7 @@ namespace CoreAPM.NET.CoreMiddleware
                 Source = httpContext.Request.Host.Value,
                 Action = httpContext.Request.Path.Value,
                 Result = httpContext.Response.StatusCode.ToString(),
+                Context = httpContext.TraceIdentifier,
                 Time = DateTime.Now,
                 Length = await time
             };
