@@ -6,7 +6,6 @@
     <AssemblyName>CoreAPM.DotNet.TestApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>TestApp</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6</PackageTargetFallback>
     <RootNamespace>CoreAPM.DotNet.TestApp</RootNamespace>
   </PropertyGroup>
 
