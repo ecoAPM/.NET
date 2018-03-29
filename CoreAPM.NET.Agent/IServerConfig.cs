@@ -2,7 +2,7 @@
 
 namespace CoreAPM.NET.Agent
 {
-    public interface IConfig
+    public interface IServerConfig
     {
         Uri BaseURL { get; }
         Guid APIKey { get; }

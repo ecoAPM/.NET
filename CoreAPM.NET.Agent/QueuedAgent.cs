@@ -15,7 +15,7 @@ namespace CoreAPM.NET.Agent
         private bool _alive = true;
         private readonly TimeSpan _sendInterval;
 
-        public QueuedAgent(IConfig config, HttpClient httpClient, TimeSpan? sendInterval = null) : base(config, httpClient)
+        public QueuedAgent(IServerConfig config, HttpClient httpClient, TimeSpan? sendInterval = null) : base(config, httpClient)
         {
             _sendInterval = sendInterval ?? TimeSpan.FromSeconds(1);
             Task.Run(RunSender);

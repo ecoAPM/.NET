@@ -13,7 +13,7 @@ namespace CoreAPM.NET.Agent.Tests
         public void AddEventUrlCombinedCorrectlyWithSlashInBase()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost/"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
 
             //act
@@ -27,7 +27,7 @@ namespace CoreAPM.NET.Agent.Tests
         public void AddEventUrlCombinedCorrectlyWithoutSlashInBase()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
 
             //act
@@ -42,7 +42,7 @@ namespace CoreAPM.NET.Agent.Tests
         {
             //arrange
             var apiKey = Guid.NewGuid();
-            var config = new Config(new Uri("http://localhost/"), apiKey);
+            var config = new ServerConfig(new Uri("http://localhost/"), apiKey);
             var httpClient = Substitute.For<HttpClient>();
 
             //act
@@ -56,7 +56,7 @@ namespace CoreAPM.NET.Agent.Tests
         public void HttpClientIsDisposedOnDispose()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost/"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new StubAgent(config, httpClient);
 
@@ -71,7 +71,7 @@ namespace CoreAPM.NET.Agent.Tests
         public async Task SendPerformsHttpPost()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost/"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new Agent(config, httpClient);
 

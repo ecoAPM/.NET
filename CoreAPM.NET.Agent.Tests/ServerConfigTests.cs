@@ -6,7 +6,7 @@ using Xunit;
 
 namespace CoreAPM.NET.Agent.Tests
 {
-    public class ConfigTests
+    public class ServerConfigTests
     {
         [Fact]
         public void CanCreateFromEnvVars()
@@ -18,7 +18,7 @@ namespace CoreAPM.NET.Agent.Tests
             Environment.SetEnvironmentVariable("CoreAPM_APIKey", apiKey.ToString());
 
             //act
-            var config = new Config();
+            var config = new ServerConfig();
 
             //assert
             Assert.Equal(url, config.BaseURL.AbsoluteUri);
@@ -33,7 +33,7 @@ namespace CoreAPM.NET.Agent.Tests
             var apiKey = Guid.NewGuid();
 
             //act
-            var config = new Config(url, apiKey.ToString());
+            var config = new ServerConfig(url, apiKey.ToString());
 
             //assert
             Assert.Equal(url, config.BaseURL.AbsoluteUri);
@@ -48,7 +48,7 @@ namespace CoreAPM.NET.Agent.Tests
             var apiKey = Guid.NewGuid();
 
             //act
-            var config = new Config(url, apiKey);
+            var config = new ServerConfig(url, apiKey);
 
             //assert
             Assert.Equal(url, config.BaseURL);
@@ -73,7 +73,7 @@ namespace CoreAPM.NET.Agent.Tests
             baseConfig.Add(configSource);
 
             //act
-            var config = new Config(baseConfig.Build());
+            var config = new ServerConfig(baseConfig.Build());
 
             //assert
             Assert.Equal(url, config.BaseURL.AbsoluteUri);
@@ -98,7 +98,7 @@ namespace CoreAPM.NET.Agent.Tests
             baseConfig.Add(configSource);
 
             //act
-            var config = new Config(baseConfig.Build());
+            var config = new ServerConfig(baseConfig.Build());
 
             //assert
             Assert.Equal(url, config.BaseURL.AbsoluteUri);

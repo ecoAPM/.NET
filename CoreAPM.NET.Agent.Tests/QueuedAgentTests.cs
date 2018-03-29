@@ -15,7 +15,7 @@ namespace CoreAPM.NET.Agent.Tests
         public void SendAddsEventToQueue()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
 
@@ -30,7 +30,7 @@ namespace CoreAPM.NET.Agent.Tests
         [Fact]
         public void EventsQueueIsClearedOnDispose()
         {
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
             agent.Send(new Event());
@@ -61,7 +61,7 @@ namespace CoreAPM.NET.Agent.Tests
         public async Task SendEventsCallsHttpPost()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
             var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
@@ -77,7 +77,7 @@ namespace CoreAPM.NET.Agent.Tests
         public async Task SendEventsRemovesSentEventsFromQueue()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient);
             var e1 = new Event { Action = "a1" };
@@ -102,13 +102,13 @@ namespace CoreAPM.NET.Agent.Tests
         public void SenderStartedOnConstruction()
         {
             //arrange
-            var config = new Config(new Uri("http://localhost"), Guid.NewGuid());
+            var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
             agent.Send(new Event());
 
             //act
-            Thread.Sleep(5);
+            Thread.Sleep(10);
 
             //assert
             httpClient.ReceivedWithAnyArgs().PostAsync(Arg.Any<Uri>(), Arg.Any<HttpContent>());
