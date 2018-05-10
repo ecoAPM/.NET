@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
@@ -17,7 +16,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
 
             //act
             var e = new Event();
@@ -32,7 +31,7 @@ namespace CoreAPM.NET.Agent.Tests
         {
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
             agent.Send(new Event());
 
             //act
@@ -63,7 +62,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
             var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
 
             //act
@@ -104,14 +103,12 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, TimeSpan.Zero);
-            agent.Send(new Event());
 
             //act
-            Thread.Sleep(10);
+            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
 
             //assert
-            httpClient.ReceivedWithAnyArgs().PostAsync(Arg.Any<Uri>(), Arg.Any<HttpContent>());
+            Assert.True(agent.IsRunning);
         }
     }
 }
