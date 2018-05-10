@@ -16,7 +16,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
 
             //act
             var e = new Event();
@@ -31,7 +31,7 @@ namespace CoreAPM.NET.Agent.Tests
         {
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
             agent.Send(new Event());
 
             //act
@@ -62,7 +62,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
             var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
 
             //act
@@ -78,7 +78,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient);
+            var agent = new QueuedAgent(config, httpClient, null);
             var e1 = new Event { Action = "a1" };
             var e2 = new Event { Action = "a2" };
             var e3 = new Event { Action = "a3" };
@@ -105,7 +105,7 @@ namespace CoreAPM.NET.Agent.Tests
             var httpClient = Substitute.For<HttpClient>();
 
             //act
-            var agent = new QueuedAgent(config, httpClient, sendInterval: TimeSpan.Zero);
+            var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
 
             //assert
             Assert.True(agent.IsRunning);

@@ -17,8 +17,8 @@ namespace CoreAPM.NET.Agent
 
         public bool IsRunning { get; private set; }
 
-        public QueuedAgent(IServerConfig config, HttpClient httpClient, ILogger logger = null, TimeSpan? sendInterval = null)
-            : base(config, httpClient, logger)
+        public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory loggerFactory = null, TimeSpan? sendInterval = null)
+            : base(config, httpClient, loggerFactory)
         {
             _sendInterval = sendInterval ?? TimeSpan.FromSeconds(1);
             IsRunning = true;
@@ -27,7 +27,7 @@ namespace CoreAPM.NET.Agent
 
         private async Task RunSender()
         {
-            _logger?.LogDebug($"[CoreAPM] {DateTime.Now}: Starting agent");
+            _logger?.Log(LogLevel.Debug, "Starting agent");
             while (IsRunning)
             {
                 Thread.Sleep(_sendInterval);
@@ -43,14 +43,15 @@ namespace CoreAPM.NET.Agent
         {
             try
             {
-                _logger?.LogDebug($"[CoreAPM] {DateTime.Now}: Sending {eventsToSend.Count} to {_addEventURL}");
+                _logger?.Log(LogLevel.Debug, $"Sending {eventsToSend.Count} event{(eventsToSend.Count > 1 ? "s" : "")} to {_addEventURL}");
                 var content = GetPostContent(eventsToSend);
                 await _httpClient.PostAsync(_addEventURL, content);
                 _eventQueue.RemoveAll(eventsToSend.Contains);
+                _logger?.Log(LogLevel.Information, $"Sent {eventsToSend.Count} event{(eventsToSend.Count > 1 ? "s" : "")} to {_addEventURL}");
             }
             catch (Exception ex)
             {
-                _logger?.LogWarning($"[CoreAPM] {DateTime.Now}: {ex}");
+                _logger?.Log(LogLevel.Warning, ex, "Failed to send events");
             }
         }
 
@@ -60,7 +61,7 @@ namespace CoreAPM.NET.Agent
 
         public override void Dispose()
         {
-            _logger?.LogDebug($"[CoreAPM] {DateTime.Now}: Shutting down agent");
+            _logger?.Log(LogLevel.Debug, "Shutting down agent");
             IsRunning = false;
             Thread.Sleep(_sendInterval);
             SendEvents(GetEventsToSend()).Wait(_sendInterval);

@@ -8,7 +8,7 @@ namespace CoreAPM.NET.Agent.Tests
         public Uri AddEventURL => _addEventURL;
         public HttpClient HttpClient => _httpClient;
 
-        public StubAgent(ServerConfig config, HttpClient httpClient) : base(config, httpClient)
+        public StubAgent(ServerConfig config, HttpClient httpClient) : base(config, httpClient, null)
         {
         }
 

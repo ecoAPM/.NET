@@ -73,7 +73,7 @@ namespace CoreAPM.NET.Agent.Tests
             //arrange
             var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
-            var agent = new Agent(config, httpClient);
+            var agent = new Agent(config, httpClient, null);
 
             //act
             agent.Send(new Event());
