@@ -11,8 +11,8 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject />
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-    <Version>0.2.1</Version>
-    <Authors>Steve Desmond</Authors>
+    <Version>0.2.7-pre</Version>
+    <Authors>CoreAPM LLC</Authors>
     <Company>CoreAPM LLC</Company>
     <Description>CoreAPM ASP.NET Core Middleware</Description>
     <Product>CoreAPM</Product>
