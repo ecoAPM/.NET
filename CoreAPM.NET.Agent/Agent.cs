@@ -12,12 +12,12 @@ namespace CoreAPM.NET.Agent
         protected readonly HttpClient _httpClient;
         protected readonly ILogger _logger;
 
-        public Agent(IServerConfig config, HttpClient httpClient, ILogger logger = null)
+        public Agent(IServerConfig config, HttpClient httpClient, ILoggerFactory loggerFactory = null)
         {
             _addEventURL = new Uri(config.BaseURL + "events");
             _httpClient = httpClient;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", config.APIKey.ToString().ToLower());
-            _logger = logger;
+            _logger = loggerFactory?.CreateLogger("CoreAPM");
         }
 
         public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());
@@ -26,12 +26,12 @@ namespace CoreAPM.NET.Agent
         {
             try
             {
-                _logger?.LogDebug($"Sending event to {_addEventURL}");
+                _logger?.Log(LogLevel.Debug, $"Sending event to {_addEventURL}");
                 _httpClient.PostAsync(_addEventURL, GetPostContent(e));
             }
             catch (Exception ex)
             {
-                _logger?.LogWarning(ex.ToString());
+                _logger?.Log(LogLevel.Warning, ex, "Failed to send event");
             }
         }
 
