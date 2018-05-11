@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>CoreAPM.NET.Agent</AssemblyName>
     <RootNamespace>CoreAPM.NET.Agent</RootNamespace>
-    <Version>0.2.7-pre</Version>
+    <Version>0.2.8-pre</Version>
     <Authors>CoreAPM LLC</Authors>
     <Company>CoreAPM LLC</Company>
     <Product>CoreAPM</Product>
