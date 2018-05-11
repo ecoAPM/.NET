@@ -29,7 +29,7 @@ namespace CoreAPM.NET.CoreMiddleware
                 Action = httpContext.Request.Path.Value,
                 Result = httpContext.Response.StatusCode.ToString(),
                 Context = httpContext.TraceIdentifier,
-                Time = DateTime.Now,
+                Time = DateTime.UtcNow,
                 Length = await time
             };
             _agent.Send(e);
