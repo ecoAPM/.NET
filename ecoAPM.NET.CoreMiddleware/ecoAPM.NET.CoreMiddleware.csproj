@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>ecoAPM.NET.CoreMiddleware</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PackageId>ecoAPM.NET.CoreMiddleware</PackageId>
+    <RootNamespace>ecoAPM.NET.CoreMiddleware</RootNamespace>
+    <ApplicationIcon />
+    <OutputTypeEx>library</OutputTypeEx>
+    <StartupObject />
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Version>0.2.8-pre</Version>
+    <Authors>ecoAPM LLC</Authors>
+    <Company>ecoAPM LLC</Company>
+    <Description>ecoAPM ASP.NET Core Middleware</Description>
+    <Product>ecoAPM</Product>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/ecoAPM/.NET</RepositoryUrl>
+    <PackageProjectUrl>https://ecoAPM.org/</PackageProjectUrl>
+    <Copyright>ecoAPM LLC</Copyright>
+    <PackageLicenseUrl>https://github.com/ecoAPM/.NET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://ecoAPM.org/logo-square.png</PackageIconUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ecoAPM.NET.Agent\ecoAPM.NET.Agent.csproj" />
+  </ItemGroup>
+
+</Project>
