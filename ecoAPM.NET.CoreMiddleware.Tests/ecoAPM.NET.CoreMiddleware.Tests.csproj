@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DebugType>portable</DebugType>
+    <AssemblyName>ecoAPM.NET.CoreMiddleware.Tests</AssemblyName>
+    <OutputType>Library</OutputType>
+    <PackageId>test</PackageId>
+    <RootNamespace>ecoAPM.NET.CoreMiddleware.Tests</RootNamespace>
+    <ApplicationIcon />
+    <OutputTypeEx>library</OutputTypeEx>
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0-rc1-final" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0-preview-20180510-03" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="xunit" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="xunit.runner.console" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0-beta.1.build3958" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ecoAPM.NET.CoreMiddleware\ecoAPM.NET.CoreMiddleware.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
