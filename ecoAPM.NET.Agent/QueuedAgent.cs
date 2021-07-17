@@ -57,7 +57,7 @@ namespace ecoAPM.NET.Agent
 
         public static HttpContent GetPostContent(IEnumerable<Event> eventsToSend) => new StringContent(JArray.FromObject(eventsToSend).ToString(), Encoding.UTF8, "application/json");
 
-        public override void Send(Event e) => _eventQueue.Add(e);
+        public override async Task Send(Event e) => await Task.Run(() => _eventQueue.Add(e));
 
         public override void Dispose()
         {
