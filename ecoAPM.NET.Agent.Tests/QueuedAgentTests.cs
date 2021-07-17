@@ -11,7 +11,7 @@ namespace ecoAPM.NET.Agent.Tests
     public class QueuedAgentTests
     {
         [Fact]
-        public void SendAddsEventToQueue()
+        public async Task SendAddsEventToQueue()
         {
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
@@ -20,7 +20,7 @@ namespace ecoAPM.NET.Agent.Tests
 
             //act
             var e = new Event();
-            agent.Send(e);
+            await agent.Send(e);
 
             //assert
             Assert.Contains(e, agent.GetEventsToSend());
@@ -61,15 +61,15 @@ namespace ecoAPM.NET.Agent.Tests
         {
             //arrange
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
-            var httpClient = Substitute.For<HttpClient>();
-            var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
+            var http = new MockHttpMessageHandler();
+            var agent = new QueuedAgent(config, new HttpClient(http), null, TimeSpan.Zero);
             var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
 
             //act
             await agent.SendEvents(events);
 
             //assert
-            await httpClient.ReceivedWithAnyArgs().PostAsync(Arg.Any<Uri>(), Arg.Any<HttpContent>());
+            Assert.True(http.Posted);
         }
 
         [Fact]
@@ -82,9 +82,9 @@ namespace ecoAPM.NET.Agent.Tests
             var e1 = new Event { Action = "a1" };
             var e2 = new Event { Action = "a2" };
             var e3 = new Event { Action = "a3" };
-            agent.Send(e1);
-            agent.Send(e2);
-            agent.Send(e3);
+            await agent.Send(e1);
+            await agent.Send(e2);
+            await agent.Send(e3);
 
             //act
             var eventsToSend = new[] { e1, e2 };
