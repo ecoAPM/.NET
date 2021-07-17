@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ecoAPM.NET.Agent.Tests
 {
@@ -12,6 +13,6 @@ namespace ecoAPM.NET.Agent.Tests
         {
         }
 
-        public override void Send(Event e) => throw new NotImplementedException();
+        public override Task Send(Event e) => throw new NotImplementedException();
     }
 }
