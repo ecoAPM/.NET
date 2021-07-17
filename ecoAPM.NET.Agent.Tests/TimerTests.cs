@@ -49,7 +49,7 @@ namespace ecoAPM.NET.Agent.Tests
             var result = timer.CurrentTime;
 
             //assert
-            Assert.InRange(result, 1, 10);
+            Assert.Equal(stopwatch.Elapsed.TotalMilliseconds, result);
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace ecoAPM.NET.Agent.Tests
             var result = timer.Time(() => Thread.Sleep(1));
 
             //assert
-            Assert.InRange(result, 1, 10);
+            Assert.Equal(stopwatch.Elapsed.TotalMilliseconds, result);
         }
     }
 }
