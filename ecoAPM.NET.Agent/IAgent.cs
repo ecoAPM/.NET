@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ecoAPM.NET.Agent
 {
     public interface IAgent : IDisposable
     {
-        void Send(Event e);
+        Task Send(Event e);
     }
 }
