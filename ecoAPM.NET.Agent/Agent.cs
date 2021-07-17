@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
@@ -22,12 +23,12 @@ namespace ecoAPM.NET.Agent
 
         public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());
 
-        public virtual void Send(Event e)
+        public virtual async Task Send(Event e)
         {
             try
             {
                 _logger?.Log(LogLevel.Debug, $"Sending event to {_addEventURL}");
-                _httpClient.PostAsync(_addEventURL, GetPostContent(e));
+                await _httpClient.PostAsync(_addEventURL, GetPostContent(e));
             }
             catch (Exception ex)
             {
