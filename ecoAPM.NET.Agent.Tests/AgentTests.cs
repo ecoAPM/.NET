@@ -72,14 +72,14 @@ namespace ecoAPM.NET.Agent.Tests
         {
             //arrange
             var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
-            var httpClient = Substitute.For<HttpClient>();
-            var agent = new Agent(config, httpClient, null);
+            var http = new MockHttpMessageHandler();
+            var agent = new Agent(config, new HttpClient(http), null);
 
             //act
-            agent.Send(new Event());
+            await agent.Send(new Event());
 
             //assert
-            await httpClient.ReceivedWithAnyArgs().PostAsync(Arg.Any<Uri>(), Arg.Any<HttpContent>());
+            Assert.True(http.Posted);
         }
 
         [Fact]
