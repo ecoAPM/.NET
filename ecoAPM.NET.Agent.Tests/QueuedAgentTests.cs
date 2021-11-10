@@ -32,7 +32,7 @@ namespace ecoAPM.NET.Agent.Tests
             var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
             var httpClient = Substitute.For<HttpClient>();
             var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
-            agent.Send(new Event());
+            _ = agent.Send(new Event());
 
             //act
             agent.Dispose();

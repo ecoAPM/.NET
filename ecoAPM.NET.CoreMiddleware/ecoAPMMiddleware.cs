@@ -32,7 +32,7 @@ namespace ecoAPM.NET.CoreMiddleware
                 Time = DateTime.UtcNow,
                 Length = await time
             };
-            _agent.Send(e);
+            _ = _agent.Send(e);
         }
 
         private async Task<double> getRequestTime(HttpContext httpContext)

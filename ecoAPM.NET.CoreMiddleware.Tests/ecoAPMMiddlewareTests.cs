@@ -24,7 +24,7 @@ namespace ecoAPM.NET.CoreMiddleware.Tests
             await middleware.Invoke(context);
 
             //assert
-            agent.Received().Send(Arg.Any<Event>());
+            await agent.Received().Send(Arg.Any<Event>());
         }
 
         [Fact]

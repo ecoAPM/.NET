@@ -1,27 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Version>0.3.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>ecoAPM.NET.Agent</AssemblyName>
     <RootNamespace>ecoAPM.NET.Agent</RootNamespace>
-    <Version>0.2.8-pre</Version>
     <Authors>ecoAPM LLC</Authors>
     <Company>ecoAPM LLC</Company>
+    <Copyright>ecoAPM LLC</Copyright>
     <Product>ecoAPM</Product>
     <Description>ecoAPM .NET Agent</Description>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://ecoAPM.org/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ecoAPM/.NET</RepositoryUrl>
-    <Copyright>ecoAPM LLC</Copyright>
-    <PackageLicenseUrl>https://github.com/ecoAPM/.NET/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://ecoAPM.org/logo-square.png</PackageIconUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Threading.Thread" Version="4.3.0" />
+    <None Include="../README.md" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="." />
   </ItemGroup>
 
 </Project>
