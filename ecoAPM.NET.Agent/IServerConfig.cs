@@ -1,10 +1,9 @@
-﻿using System;
+using System;
 
-namespace ecoAPM.NET.Agent
+namespace ecoAPM.NET.Agent;
+
+public interface IServerConfig
 {
-    public interface IServerConfig
-    {
-        Uri BaseURL { get; }
-        Guid APIKey { get; }
-    }
+	Uri BaseURL { get; }
+	Guid APIKey { get; }
 }

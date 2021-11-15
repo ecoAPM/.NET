@@ -15,6 +15,7 @@
     <RepositoryUrl>https://github.com/ecoAPM/.NET</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIconUrl>https://ecoAPM.org/logo-square.png</PackageIconUrl>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

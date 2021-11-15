@@ -1,19 +1,18 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ecoAPM.DotNet.TestApp
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup<Startup>()
-                .Build();
+namespace ecoAPM.DotNet.TestApp;
 
-            host.Run();
-        }
-    }
+public class Program
+{
+	public static void Main(string[] args)
+	{
+		var host = new WebHostBuilder()
+			.UseKestrel()
+			.UseContentRoot(Directory.GetCurrentDirectory())
+			.UseStartup<Startup>()
+			.Build();
+
+		host.Run();
+	}
 }
