@@ -1,6 +1,3 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using Xunit;
@@ -49,7 +46,7 @@ public class AgentTests
 		var agent = new StubAgent(config, httpClient);
 
 		//assert
-		Assert.Contains(apiKey.ToString(), agent.HttpClient.DefaultRequestHeaders.Authorization.ToString());
+		Assert.Contains(apiKey.ToString(), agent.HttpClient.DefaultRequestHeaders.Authorization?.ToString() ?? string.Empty);
 	}
 
 	[Fact]
@@ -73,7 +70,7 @@ public class AgentTests
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
 		var http = new MockHttpMessageHandler();
-		var agent = new Agent(config, new HttpClient(http), null);
+		var agent = new Agent(config, new HttpClient(http));
 
 		//act
 		await agent.Send(new Event());

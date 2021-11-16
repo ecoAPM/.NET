@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Memory;
 using Xunit;
@@ -65,10 +63,10 @@ public class ServerConfigTests
 		var configSource = new MemoryConfigurationSource
 		{
 			InitialData = new Dictionary<string, string>
-				{
-					{"ecoAPM_BaseURL", url},
-					{"ecoAPM_APIKey", apiKey.ToString()}
-				}
+			{
+				{ "ecoAPM_BaseURL", url },
+				{ "ecoAPM_APIKey", apiKey.ToString() }
+			}
 		};
 		baseConfig.Add(configSource);
 
@@ -90,10 +88,10 @@ public class ServerConfigTests
 		var configSource = new MemoryConfigurationSource
 		{
 			InitialData = new Dictionary<string, string>
-				{
-					{"ecoAPM:BaseURL", url},
-					{"ecoAPM:APIKey", apiKey.ToString()}
-				}
+			{
+				{ "ecoAPM:BaseURL", url },
+				{ "ecoAPM:APIKey", apiKey.ToString() }
+			}
 		};
 		baseConfig.Add(configSource);
 

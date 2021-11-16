@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 
 namespace ecoAPM.NET.Agent;
@@ -7,7 +6,7 @@ public class Timer : ITimer
 {
 	private readonly Stopwatch _stopwatch;
 
-	public Timer(Stopwatch stopwatch = null)
+	public Timer(Stopwatch? stopwatch = null)
 	{
 		_stopwatch = stopwatch ?? new Stopwatch();
 	}

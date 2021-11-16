@@ -1,7 +1,4 @@
-using System;
-using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
@@ -11,9 +8,9 @@ public class Agent : IAgent
 {
 	protected readonly Uri _addEventURL;
 	protected readonly HttpClient _httpClient;
-	protected readonly ILogger _logger;
+	protected readonly ILogger? _logger;
 
-	public Agent(IServerConfig config, HttpClient httpClient, ILoggerFactory loggerFactory = null)
+	public Agent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null)
 	{
 		_addEventURL = new Uri(config.BaseURL + "events");
 		_httpClient = httpClient;

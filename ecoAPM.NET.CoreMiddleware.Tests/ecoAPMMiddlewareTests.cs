@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using ecoAPM.NET.Agent;
 using Microsoft.AspNetCore.Http;
 using NSubstitute;

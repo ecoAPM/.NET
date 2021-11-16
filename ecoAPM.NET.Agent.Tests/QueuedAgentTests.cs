@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using Xunit;
@@ -78,7 +74,7 @@ public class QueuedAgentTests
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
 		var httpClient = Substitute.For<HttpClient>();
-		var agent = new QueuedAgent(config, httpClient, null);
+		var agent = new QueuedAgent(config, httpClient);
 		var e1 = new Event { Action = "a1" };
 		var e2 = new Event { Action = "a2" };
 		var e3 = new Event { Action = "a3" };

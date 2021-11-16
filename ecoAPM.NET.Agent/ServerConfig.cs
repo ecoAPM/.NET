@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Extensions.Configuration;
 
 namespace ecoAPM.NET.Agent;
@@ -15,21 +14,21 @@ public class ServerConfig : IServerConfig
 
 	public ServerConfig(IConfiguration config)
 		: this(config["ecoAPM:BaseURL"] ?? config["ecoAPM_BaseURL"] ?? envBaseURL,
-			  config["ecoAPM:APIKey"] ?? config["ecoAPM_APIKey"] ?? envAPIKey)
+			config["ecoAPM:APIKey"] ?? config["ecoAPM_APIKey"] ?? envAPIKey)
 	{
 	}
 
-	public ServerConfig(string baseURL, string apiKey)
+	public ServerConfig(string? baseURL, string? apiKey)
 		: this(new Uri(baseURL ?? envBaseURL), new Guid(apiKey ?? envAPIKey))
 	{
 	}
 
-	public ServerConfig(Uri baseURL, Guid? apiKey)
+	public ServerConfig(Uri? baseURL, Guid? apiKey)
 	{
 		BaseURL = baseURL ?? new Uri(envBaseURL);
 		APIKey = apiKey ?? new Guid(envAPIKey);
 	}
 
-	private static readonly string envBaseURL = Environment.GetEnvironmentVariable("ecoAPM_BaseURL");
-	private static readonly string envAPIKey = Environment.GetEnvironmentVariable("ecoAPM_APIKey");
+	private static readonly string envBaseURL = Environment.GetEnvironmentVariable("ecoAPM_BaseURL") ?? string.Empty;
+	private static readonly string envAPIKey = Environment.GetEnvironmentVariable("ecoAPM_APIKey") ?? string.Empty;
 }

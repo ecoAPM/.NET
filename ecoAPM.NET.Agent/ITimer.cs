@@ -1,5 +1,3 @@
-using System;
-
 namespace ecoAPM.NET.Agent;
 
 public interface ITimer

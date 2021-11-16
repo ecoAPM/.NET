@@ -1,7 +1,3 @@
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace ecoAPM.NET.Agent.Tests;
 
 internal class MockHttpMessageHandler : HttpMessageHandler

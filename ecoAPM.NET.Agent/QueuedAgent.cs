@@ -1,10 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
@@ -12,12 +6,12 @@ namespace ecoAPM.NET.Agent;
 
 public class QueuedAgent : Agent
 {
-	private readonly List<Event> _eventQueue = new List<Event>();
+	private readonly List<Event> _eventQueue = new();
 	private readonly TimeSpan _sendInterval;
 
 	public bool IsRunning { get; private set; }
 
-	public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory loggerFactory = null, TimeSpan? sendInterval = null)
+	public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null, TimeSpan? sendInterval = null)
 		: base(config, httpClient, loggerFactory)
 	{
 		_sendInterval = sendInterval ?? TimeSpan.FromSeconds(1);

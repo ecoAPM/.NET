@@ -1,5 +1,3 @@
-using System;
-using System.Threading.Tasks;
 using ecoAPM.NET.Agent;
 using Microsoft.AspNetCore.Http;
 

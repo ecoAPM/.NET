@@ -1,9 +1,6 @@
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
+namespace ecoAPM.NET.TestApp;
 
-namespace ecoAPM.DotNet.TestApp;
-
-public class Program
+public static class Program
 {
 	public static void Main(string[] args)
 	{
