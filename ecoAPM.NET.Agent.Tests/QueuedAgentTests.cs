@@ -12,11 +12,12 @@ public class QueuedAgentTests
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
 		var httpClient = Substitute.For<HttpClient>();
-		var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
+		var agent = new QueuedAgent(config, httpClient, null, TimeSpan.MaxValue);
 
 		//act
 		var e = new Event();
 		await agent.Send(e);
+		await Task.Delay(1);
 
 		//assert
 		Assert.Contains(e, agent.GetEventsToSend());
