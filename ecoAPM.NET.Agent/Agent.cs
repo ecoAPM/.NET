@@ -27,7 +27,11 @@ public class Agent : IAgent
 		try
 		{
 			_logger?.Log(LogLevel.Debug, $"Sending request to {_requestURL}");
-			await _httpClient.PostAsync(_requestURL, GetPostContent(request));
+			var response = await _httpClient.PostAsync(_requestURL, GetPostContent(request));
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new HttpRequestException($"Requests were not accepted: {(int)response.StatusCode} {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
+			}
 		}
 		catch (Exception ex)
 		{

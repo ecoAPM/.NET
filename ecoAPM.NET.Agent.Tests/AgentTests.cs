@@ -1,4 +1,6 @@
+using System.Net;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Xunit;
 
@@ -90,5 +92,43 @@ public class AgentTests
 
 		//assert
 		Assert.Equal("a1", JsonSerializer.Deserialize<Request>(json)!.Action);
+	}
+
+	[Fact]
+	public async Task ErrorLogsWarning()
+	{
+		//arrange
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
+		var loggerFactory = Substitute.For<ILoggerFactory>();
+		var logger = new MockLogger();
+		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
+		var agent = new Agent(config, new HttpClient(http), loggerFactory);
+
+		//act
+		await agent.Send(new Request());
+
+		//assert
+		var log = logger.Output.ToString();
+		Assert.Contains("Warning:", log);
+	}
+
+	[Fact]
+	public async Task SuccessDoesNotLogWarning()
+	{
+		//arrange
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var http = new MockHttpMessageHandler();
+		var loggerFactory = Substitute.For<ILoggerFactory>();
+		var logger = new MockLogger();
+		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
+		var agent = new Agent(config, new HttpClient(http), loggerFactory);
+
+		//act
+		await agent.Send(new Request());
+
+		//assert
+		var log = logger.Output.ToString();
+		Assert.DoesNotContain("Warning:", log);
 	}
 }

@@ -7,6 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ecoAPM.NET.CoreMiddleware\ecoAPM.NET.CoreMiddleware.csproj"/>
+		<ProjectReference Include="..\ecoAPM.NET.CoreMiddleware\ecoAPM.NET.CoreMiddleware.csproj" />
 	</ItemGroup>
 </Project>

@@ -1,15 +1,16 @@
-namespace ecoAPM.NET.TestApp;
+using ecoAPM.NET.CoreMiddleware;
 
-public static class Program
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddecoAPM(builder.Configuration);
+
+var app = builder.Build();
+app.UseecoAPM();
+
+app.MapGet("/", () => "Hello, world!");
+app.MapGet("/slow", async () =>
 {
-	public static void Main(string[] args)
-	{
-		var host = new WebHostBuilder()
-			.UseKestrel()
-			.UseContentRoot(Directory.GetCurrentDirectory())
-			.UseStartup<Startup>()
-			.Build();
+	await Task.Delay(1_000);
+	return "HellaSlow, world!";
+});
 
-		host.Run();
-	}
-}
+app.Run();

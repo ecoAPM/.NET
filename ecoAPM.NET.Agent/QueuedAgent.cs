@@ -11,10 +11,10 @@ public class QueuedAgent : Agent
 
 	public bool IsRunning { get; private set; }
 
-	public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null, TimeSpan? sendInterval = null)
+	public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null)
 		: base(config, httpClient, loggerFactory)
 	{
-		_sendInterval = sendInterval ?? TimeSpan.FromSeconds(5);
+		_sendInterval = config.Interval;
 		IsRunning = true;
 		Task.Run(RunSender);
 	}
@@ -24,7 +24,7 @@ public class QueuedAgent : Agent
 		_logger?.Log(LogLevel.Debug, "Starting agent");
 		while (IsRunning)
 		{
-			Thread.Sleep(_sendInterval);
+			await Task.Delay(_sendInterval);
 			var toSend = GetRequestsToSend();
 			if (toSend.Any())
 				await SendRequests(toSend);
@@ -34,19 +34,31 @@ public class QueuedAgent : Agent
 	public IList<Request> GetRequestsToSend()
 		=> _requestQueue.ToList();
 
+	private bool _sending;
+
 	public async Task SendRequests(ICollection<Request> requests)
 	{
+		_sending = true;
 		try
 		{
 			_logger?.Log(LogLevel.Debug, $"Sending {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
 			var content = GetPostContent(requests);
-			await _httpClient.PostAsync(_requestURL, content);
+			var response = await _httpClient.PostAsync(_requestURL, content);
+			if (!response.IsSuccessStatusCode)
+			{
+				throw new HttpRequestException($"Requests were not accepted: {(int)response.StatusCode} {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
+			}
+
 			_requestQueue.RemoveAll(requests.Contains);
 			_logger?.Log(LogLevel.Information, $"Sent {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
 		}
 		catch (Exception ex)
 		{
 			_logger?.Log(LogLevel.Warning, ex, "Failed to send requests");
+		}
+		finally
+		{
+			_sending = false;
 		}
 	}
 
@@ -60,8 +72,10 @@ public class QueuedAgent : Agent
 	{
 		_logger?.Log(LogLevel.Debug, "Shutting down agent");
 		IsRunning = false;
-		Thread.Sleep(_sendInterval);
-		SendRequests(GetRequestsToSend()).Wait(_sendInterval);
+		SpinWait.SpinUntil(() => !_sending);
+		var leftover = GetRequestsToSend();
+		var timeout = _sendInterval.TotalMilliseconds > int.MaxValue ? int.MaxValue : (int)_sendInterval.TotalMilliseconds;
+		SendRequests(leftover).Wait(timeout);
 		base.Dispose();
 	}
 }
