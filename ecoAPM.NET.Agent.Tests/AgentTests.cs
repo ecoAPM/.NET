@@ -7,7 +7,7 @@ namespace ecoAPM.NET.Agent.Tests;
 public class AgentTests
 {
 	[Fact]
-	public void AddEventUrlCombinedCorrectlyWithSlashInBase()
+	public void RequestUrlCombinedCorrectlyWithSlashInBase()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
@@ -17,11 +17,11 @@ public class AgentTests
 		var agent = new StubAgent(config, httpClient);
 
 		//assert
-		Assert.Equal("http://localhost/events", agent.AddEventURL.AbsoluteUri);
+		Assert.Equal("http://localhost/requests", agent.RequestUrl.AbsoluteUri);
 	}
 
 	[Fact]
-	public void AddEventUrlCombinedCorrectlyWithoutSlashInBase()
+	public void RequestUrlCombinedCorrectlyWithoutSlashInBase()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
@@ -31,7 +31,7 @@ public class AgentTests
 		var agent = new StubAgent(config, httpClient);
 
 		//assert
-		Assert.Equal("http://localhost/events", agent.AddEventURL.AbsoluteUri);
+		Assert.Equal("http://localhost/requests", agent.RequestUrl.AbsoluteUri);
 	}
 
 	[Fact]
@@ -73,20 +73,20 @@ public class AgentTests
 		var agent = new Agent(config, new HttpClient(http));
 
 		//act
-		await agent.Send(new Event());
+		await agent.Send(new Request());
 
 		//assert
 		Assert.True(http.Posted);
 	}
 
 	[Fact]
-	public async Task EventCanConvertToJSON()
+	public async Task RequestCanConvertToJSON()
 	{
 		//arrange
-		var e = new Event { Action = "a1" };
+		var request = new Request { Action = "a1" };
 
 		//act
-		var json = await Agent.GetPostContent(e).ReadAsStringAsync();
+		var json = await Agent.GetPostContent(request).ReadAsStringAsync();
 
 		//assert
 		Assert.Equal("a1", JObject.Parse(json)["Action"]);

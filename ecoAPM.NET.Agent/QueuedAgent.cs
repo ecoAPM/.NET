@@ -6,7 +6,7 @@ namespace ecoAPM.NET.Agent;
 
 public class QueuedAgent : Agent
 {
-	private readonly List<Event> _eventQueue = new();
+	private readonly List<Request> _requestQueue = new();
 	private readonly TimeSpan _sendInterval;
 
 	public bool IsRunning { get; private set; }
@@ -25,40 +25,43 @@ public class QueuedAgent : Agent
 		while (IsRunning)
 		{
 			Thread.Sleep(_sendInterval);
-			var eventsToSend = GetEventsToSend();
-			if (eventsToSend.Any())
-				await SendEvents(eventsToSend);
+			var toSend = GetRequestsToSend();
+			if (toSend.Any())
+				await SendRequests(toSend);
 		}
 	}
 
-	public IList<Event> GetEventsToSend() => _eventQueue.ToList();
+	public IList<Request> GetRequestsToSend()
+		=> _requestQueue.ToList();
 
-	public async Task SendEvents(ICollection<Event> eventsToSend)
+	public async Task SendRequests(ICollection<Request> requests)
 	{
 		try
 		{
-			_logger?.Log(LogLevel.Debug, $"Sending {eventsToSend.Count} event{(eventsToSend.Count > 1 ? "s" : "")} to {_addEventURL}");
-			var content = GetPostContent(eventsToSend);
-			await _httpClient.PostAsync(_addEventURL, content);
-			_eventQueue.RemoveAll(eventsToSend.Contains);
-			_logger?.Log(LogLevel.Information, $"Sent {eventsToSend.Count} event{(eventsToSend.Count > 1 ? "s" : "")} to {_addEventURL}");
+			_logger?.Log(LogLevel.Debug, $"Sending {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
+			var content = GetPostContent(requests);
+			await _httpClient.PostAsync(_requestURL, content);
+			_requestQueue.RemoveAll(requests.Contains);
+			_logger?.Log(LogLevel.Information, $"Sent {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
 		}
 		catch (Exception ex)
 		{
-			_logger?.Log(LogLevel.Warning, ex, "Failed to send events");
+			_logger?.Log(LogLevel.Warning, ex, "Failed to send requests");
 		}
 	}
 
-	public static HttpContent GetPostContent(IEnumerable<Event> eventsToSend) => new StringContent(JArray.FromObject(eventsToSend).ToString(), Encoding.UTF8, "application/json");
+	public static HttpContent GetPostContent(IEnumerable<Request> requests)
+		=> new StringContent(JArray.FromObject(requests).ToString(), Encoding.UTF8, "application/json");
 
-	public override async Task Send(Event e) => await Task.Run(() => _eventQueue.Add(e));
+	public override async Task Send(Request request)
+		=> await Task.Run(() => _requestQueue.Add(request));
 
 	public override void Dispose()
 	{
 		_logger?.Log(LogLevel.Debug, "Shutting down agent");
 		IsRunning = false;
 		Thread.Sleep(_sendInterval);
-		SendEvents(GetEventsToSend()).Wait(_sendInterval);
+		SendRequests(GetRequestsToSend()).Wait(_sendInterval);
 		base.Dispose();
 	}
 }

@@ -7,7 +7,7 @@ namespace ecoAPM.NET.Agent.Tests;
 public class QueuedAgentTests
 {
 	[Fact]
-	public async Task SendAddsEventToQueue()
+	public async Task SendAddsRequestToQueue()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
@@ -15,37 +15,37 @@ public class QueuedAgentTests
 		var agent = new QueuedAgent(config, httpClient, null, TimeSpan.MaxValue);
 
 		//act
-		var e = new Event();
-		await agent.Send(e);
+		var request = new Request();
+		await agent.Send(request);
 		await Task.Delay(1);
 
 		//assert
-		Assert.Contains(e, agent.GetEventsToSend());
+		Assert.Contains(request, agent.GetRequestsToSend());
 	}
 
 	[Fact]
-	public void EventsQueueIsClearedOnDispose()
+	public void RequestQueueIsClearedOnDispose()
 	{
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient, null, TimeSpan.Zero);
-		_ = agent.Send(new Event());
+		_ = agent.Send(new Request());
 
 		//act
 		agent.Dispose();
 
 		//assert
-		Assert.Empty(agent.GetEventsToSend());
+		Assert.Empty(agent.GetRequestsToSend());
 	}
 
 	[Fact]
-	public async Task PostContentContainsAllEvents()
+	public async Task PostContentContainsAllRequests()
 	{
 		//arrange
-		var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
+		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 
 		//act
-		var postContent = QueuedAgent.GetPostContent(events);
+		var postContent = QueuedAgent.GetPostContent(requests);
 
 		//assert
 		var actions = JArray.Parse(await postContent.ReadAsStringAsync()).Select(t => t["Action"]).ToList();
@@ -54,44 +54,44 @@ public class QueuedAgentTests
 	}
 
 	[Fact]
-	public async Task SendEventsCallsHttpPost()
+	public async Task SendRequestsCallsHttpPost()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
 		var http = new MockHttpMessageHandler();
 		var agent = new QueuedAgent(config, new HttpClient(http), null, TimeSpan.Zero);
-		var events = new[] { new Event { Action = "a1" }, new Event { Action = "a2" } };
+		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 
 		//act
-		await agent.SendEvents(events);
+		await agent.SendRequests(requests);
 
 		//assert
 		Assert.True(http.Posted);
 	}
 
 	[Fact]
-	public async Task SendEventsRemovesSentEventsFromQueue()
+	public async Task SendRemovesSentRequestsFromQueue()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient);
-		var e1 = new Event { Action = "a1" };
-		var e2 = new Event { Action = "a2" };
-		var e3 = new Event { Action = "a3" };
-		await agent.Send(e1);
-		await agent.Send(e2);
-		await agent.Send(e3);
+		var r1 = new Request { Action = "a1" };
+		var r2 = new Request { Action = "a2" };
+		var r3 = new Request { Action = "a3" };
+		await agent.Send(r1);
+		await agent.Send(r2);
+		await agent.Send(r3);
 
 		//act
-		var eventsToSend = new[] { e1, e2 };
-		await agent.SendEvents(eventsToSend);
+		var toSend = new[] { r1, r2 };
+		await agent.SendRequests(toSend);
 
 		//assert
-		var eventsLeft = agent.GetEventsToSend();
-		Assert.DoesNotContain(e1, eventsLeft);
-		Assert.DoesNotContain(e2, eventsLeft);
-		Assert.Contains(e3, eventsLeft);
+		var remaining = agent.GetRequestsToSend();
+		Assert.DoesNotContain(r1, remaining);
+		Assert.DoesNotContain(r2, remaining);
+		Assert.Contains(r3, remaining);
 	}
 
 	[Fact]

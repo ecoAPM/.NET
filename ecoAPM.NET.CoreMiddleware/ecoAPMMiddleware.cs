@@ -19,7 +19,7 @@ public class ecoAPMMiddleware
 	public async Task Invoke(HttpContext httpContext)
 	{
 		var time = getRequestTime(httpContext);
-		var e = new Event
+		var request = new Request
 		{
 			ID = Guid.NewGuid(),
 			Type = "ServerResponse",
@@ -30,7 +30,7 @@ public class ecoAPMMiddleware
 			Time = DateTime.UtcNow,
 			Length = await time
 		};
-		_ = _agent.Send(e);
+		_ = _agent.Send(request);
 	}
 
 	private async Task<double> getRequestTime(HttpContext httpContext)

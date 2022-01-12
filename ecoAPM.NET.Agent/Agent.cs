@@ -6,30 +6,31 @@ namespace ecoAPM.NET.Agent;
 
 public class Agent : IAgent
 {
-	protected readonly Uri _addEventURL;
+	protected readonly Uri _requestURL;
 	protected readonly HttpClient _httpClient;
 	protected readonly ILogger? _logger;
 
 	public Agent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null)
 	{
-		_addEventURL = new Uri(config.BaseURL + "events");
+		_requestURL = new Uri(config.BaseURL + "requests");
 		_httpClient = httpClient;
 		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", config.APIKey.ToString().ToLower());
 		_logger = loggerFactory?.CreateLogger("ecoAPM");
 	}
 
-	public static HttpContent GetPostContent(Event e) => new StringContent(JObject.FromObject(e).ToString());
+	public static HttpContent GetPostContent(Request request)
+		=> new StringContent(JObject.FromObject(request).ToString());
 
-	public virtual async Task Send(Event e)
+	public virtual async Task Send(Request request)
 	{
 		try
 		{
-			_logger?.Log(LogLevel.Debug, $"Sending event to {_addEventURL}");
-			await _httpClient.PostAsync(_addEventURL, GetPostContent(e));
+			_logger?.Log(LogLevel.Debug, $"Sending request to {_requestURL}");
+			await _httpClient.PostAsync(_requestURL, GetPostContent(request));
 		}
 		catch (Exception ex)
 		{
-			_logger?.Log(LogLevel.Warning, ex, "Failed to send event");
+			_logger?.Log(LogLevel.Warning, ex, "Failed to send request");
 		}
 	}
 

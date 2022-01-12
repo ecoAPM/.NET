@@ -1,6 +1,6 @@
 namespace ecoAPM.NET.Agent;
 
-public class Event
+public class Request
 {
 	public Guid ID { get; set; }
 	public string? Type { get; set; }
