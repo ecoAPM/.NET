@@ -1,6 +1,7 @@
 using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 
 namespace ecoAPM.NET.Agent;
 
@@ -19,7 +20,7 @@ public class Agent : IAgent
 	}
 
 	public static HttpContent GetPostContent(Request request)
-		=> new StringContent(JObject.FromObject(request).ToString());
+		=> new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
 
 	public virtual async Task Send(Request request)
 	{

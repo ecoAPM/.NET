@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using NSubstitute;
 using Xunit;
 
@@ -45,10 +45,10 @@ public class QueuedAgentTests
 		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 
 		//act
-		var postContent = QueuedAgent.GetPostContent(requests);
+		var json = await QueuedAgent.GetPostContent(requests).ReadAsStringAsync();
 
 		//assert
-		var actions = JArray.Parse(await postContent.ReadAsStringAsync()).Select(t => t["Action"]).ToList();
+		var actions = JsonSerializer.Deserialize<IEnumerable<Request>>(json)!.Select(t => t.Action).ToList();
 		Assert.Contains("a1", actions);
 		Assert.Contains("a2", actions);
 	}

@@ -21,7 +21,6 @@
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
 		<ProjectReference Include="../ecoAPM.NET.Agent/ecoAPM.NET.Agent.csproj"/>
 		<None Include="../README.md" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="."/>
 	</ItemGroup>

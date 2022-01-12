@@ -24,9 +24,8 @@
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="System.Threading.Thread" Version="4.3.0" />
 		<None Include="../README.md" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="." />
+		<PackageReference Include="System.Text.Json" Version="6.0.1" />
 	</ItemGroup>
 
 </Project>

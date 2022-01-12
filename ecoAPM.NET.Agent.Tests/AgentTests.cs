@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Linq;
+using System.Text.Json;
 using NSubstitute;
 using Xunit;
 
@@ -89,6 +89,6 @@ public class AgentTests
 		var json = await Agent.GetPostContent(request).ReadAsStringAsync();
 
 		//assert
-		Assert.Equal("a1", JObject.Parse(json)["Action"]);
+		Assert.Equal("a1", JsonSerializer.Deserialize<Request>(json)!.Action);
 	}
 }

@@ -1,6 +1,6 @@
 using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 
 namespace ecoAPM.NET.Agent;
 
@@ -14,7 +14,7 @@ public class QueuedAgent : Agent
 	public QueuedAgent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null, TimeSpan? sendInterval = null)
 		: base(config, httpClient, loggerFactory)
 	{
-		_sendInterval = sendInterval ?? TimeSpan.FromSeconds(1);
+		_sendInterval = sendInterval ?? TimeSpan.FromSeconds(5);
 		IsRunning = true;
 		Task.Run(RunSender);
 	}
@@ -51,7 +51,7 @@ public class QueuedAgent : Agent
 	}
 
 	public static HttpContent GetPostContent(IEnumerable<Request> requests)
-		=> new StringContent(JArray.FromObject(requests).ToString(), Encoding.UTF8, "application/json");
+		=> new StringContent(JsonSerializer.Serialize(requests), Encoding.UTF8, "application/json");
 
 	public override async Task Send(Request request)
 		=> await Task.Run(() => _requestQueue.Add(request));
