@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Version>0.4.0</Version>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<Authors>ecoAPM LLC</Authors>
+		<Company>ecoAPM LLC</Company>
+		<Copyright>ecoAPM LLC</Copyright>
+		<Product>ecoAPM</Product>
+		<Description>ecoAPM ASP.NET Core Middleware</Description>
+		<PackageProjectUrl>https://ecoAPM.org/</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/ecoAPM/.NET</RepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIconUrl>https://ecoAPM.org/logo-square.png</PackageIconUrl>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>ecoAPM.Middleware</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0"/>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0"/>
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0"/>
+		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0"/>
+		<ProjectReference Include="../Agent/Agent.csproj"/>
+		<None Include="../README.md" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="."/>
+	</ItemGroup>
+
+</Project>

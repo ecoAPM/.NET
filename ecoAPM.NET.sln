@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecoAPM.NET.Agent", "ecoAPM.NET.Agent\ecoAPM.NET.Agent.csproj", "{0D949293-F311-4545-AD7F-C522DFBC506C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent", "Agent\Agent.csproj", "{0D949293-F311-4545-AD7F-C522DFBC506C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecoAPM.NET.Agent.Tests", "ecoAPM.NET.Agent.Tests\ecoAPM.NET.Agent.Tests.csproj", "{D3A6D673-565F-42E8-883B-88F824171FE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Agent.Tests", "Agent.Tests\Agent.Tests.csproj", "{D3A6D673-565F-42E8-883B-88F824171FE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecoAPM.NET.CoreMiddleware", "ecoAPM.NET.CoreMiddleware\ecoAPM.NET.CoreMiddleware.csproj", "{9486903C-3EDD-4F3B-BF56-DCD5DC65E1DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware", "Middleware\Middleware.csproj", "{9486903C-3EDD-4F3B-BF56-DCD5DC65E1DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecoAPM.NET.CoreMiddleware.Tests", "ecoAPM.NET.CoreMiddleware.Tests\ecoAPM.NET.CoreMiddleware.Tests.csproj", "{022D5FF6-6D11-48E0-A470-6C431B9608DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Middleware.Tests", "Middleware.Tests\Middleware.Tests.csproj", "{022D5FF6-6D11-48E0-A470-6C431B9608DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecoAPM.NET.TestApp", "ecoAPM.NET.TestApp\ecoAPM.NET.TestApp.csproj", "{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.csproj", "{F38F8C44-417F-4D74-82FB-A38B2BAD60F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

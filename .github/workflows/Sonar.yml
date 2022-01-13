@@ -24,7 +24,7 @@ jobs:
         run: dotnet restore
 
       - name: Start Sonar Analysis
-        run: dotnet-sonarscanner begin /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /o:"ecoapm" /k:"ecoAPM_.NET" /d:sonar.cs.vstest.reportsPaths="*.Tests/**/results.trx" /d:sonar.cs.opencover.reportsPaths="*.Tests/**/coverage.opencover.xml" /d:sonar.coverage.exclusions="ecoAPM.NET.TestApp/**"
+        run: dotnet-sonarscanner begin /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /o:"ecoapm" /k:"ecoAPM_.NET" /d:sonar.cs.vstest.reportsPaths="*.Tests/**/results.trx" /d:sonar.cs.opencover.reportsPaths="*.Tests/**/coverage.opencover.xml" /d:sonar.coverage.exclusions="TestApp/**"
 
       - name: Build
         run: dotnet build --no-restore
