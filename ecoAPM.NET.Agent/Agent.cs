@@ -39,8 +39,17 @@ public class Agent : IAgent
 		}
 	}
 
-	public virtual void Dispose()
+	public void Dispose()
 	{
-		_httpClient.Dispose();
+		Dispose(true);
+		GC.SuppressFinalize(this);
+	}
+
+	protected virtual void Dispose(bool disposing)
+	{
+		if (disposing)
+		{
+			_httpClient.Dispose();
+		}
 	}
 }

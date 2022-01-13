@@ -68,14 +68,18 @@ public class QueuedAgent : Agent
 	public override async Task Send(Request request)
 		=> await Task.Run(() => _requestQueue.Add(request));
 
-	public override void Dispose()
+	protected override void Dispose(bool disposing)
 	{
-		_logger?.Log(LogLevel.Debug, "Shutting down agent");
-		IsRunning = false;
-		SpinWait.SpinUntil(() => !_sending);
-		var leftover = GetRequestsToSend();
-		var timeout = _sendInterval.TotalMilliseconds > int.MaxValue ? int.MaxValue : (int)_sendInterval.TotalMilliseconds;
-		SendRequests(leftover).Wait(timeout);
-		base.Dispose();
+		if (disposing)
+		{
+			_logger?.Log(LogLevel.Debug, "Shutting down agent");
+			IsRunning = false;
+			SpinWait.SpinUntil(() => !_sending);
+			var leftover = GetRequestsToSend();
+			var timeout = _sendInterval.TotalMilliseconds > int.MaxValue ? int.MaxValue : (int)_sendInterval.TotalMilliseconds;
+			SendRequests(leftover).Wait(timeout);
+		}
+
+		base.Dispose(disposing);
 	}
 }
