@@ -1,4 +1,5 @@
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
@@ -48,7 +49,8 @@ public class AgentTests
 		var agent = new StubAgent(config, httpClient);
 
 		//assert
-		Assert.Contains(apiKey.ToString(), agent.HttpClient.DefaultRequestHeaders.Authorization?.ToString() ?? string.Empty);
+		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey.ToString()));
+		Assert.Contains(base64, agent.HttpClient.DefaultRequestHeaders.Authorization?.ToString() ?? string.Empty);
 	}
 
 	[Fact]

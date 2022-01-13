@@ -15,7 +15,8 @@ public class Agent : IAgent
 	{
 		_requestURL = new Uri(config.BaseURL + "requests");
 		_httpClient = httpClient;
-		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", config.APIKey.ToString().ToLower());
+		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(config.APIKey.ToString()));
+		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
 		_logger = loggerFactory?.CreateLogger("ecoAPM");
 	}
 
