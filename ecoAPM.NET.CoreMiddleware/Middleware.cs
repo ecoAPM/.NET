@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace ecoAPM.NET.CoreMiddleware;
 
-public class ecoAPMMiddleware
+public class Middleware
 {
 	private readonly RequestDelegate _next;
 	private readonly IAgent _agent;
 	private readonly Func<ITimer> newTimer;
 
-	public ecoAPMMiddleware(RequestDelegate next, IAgent agent, Func<ITimer> timerFac)
+	public Middleware(RequestDelegate next, IAgent agent, Func<ITimer> timerFac)
 	{
 		newTimer = timerFac;
 		_next = next;

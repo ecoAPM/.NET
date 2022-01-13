@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ecoAPM.NET.CoreMiddleware.Tests;
 
-public class ecoAPMMiddlewareExtensionsTests
+public class MiddlewareExtensionsTests
 {
 	[Fact]
 	public void CanCreateDefault()
@@ -13,9 +13,9 @@ public class ecoAPMMiddlewareExtensionsTests
 		var app = Substitute.For<IApplicationBuilder>();
 
 		//act
-		app.UseecoAPM();
+		app.UseEcoAPM();
 
 		//assert
-		app.Received().UseMiddleware<ecoAPMMiddleware>();
+		app.Received().UseMiddleware<Middleware>();
 	}
 }

@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ecoAPM.NET.CoreMiddleware.Tests;
 
-public class ecoAPMServicesExtensionsTests
+public class ServicesExtensionsTests
 {
 	[Fact]
 	public void CanSetupDI()
@@ -14,9 +14,9 @@ public class ecoAPMServicesExtensionsTests
 		var config = new ConfigurationBuilder().Build();
 
 		//act
-		di.AddecoAPM(config);
+		di.AddEcoAPM(config);
 
 		//assert
-		Assert.Contains(typeof(ecoAPMMiddleware), di.Select(d => d.ImplementationType));
+		Assert.Contains(typeof(Middleware), di.Select(d => d.ImplementationType));
 	}
 }

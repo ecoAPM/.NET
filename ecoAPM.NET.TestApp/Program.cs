@@ -1,10 +1,10 @@
 using ecoAPM.NET.CoreMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddecoAPM(builder.Configuration);
+builder.Services.AddEcoAPM(builder.Configuration);
 
 var app = builder.Build();
-app.UseecoAPM();
+app.UseEcoAPM();
 
 app.MapGet("/", () => "Hello, world!");
 app.MapGet("/slow", async () =>

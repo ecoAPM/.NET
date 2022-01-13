@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ecoAPM.NET.CoreMiddleware.Tests;
 
-public class ecoAPMMiddlewareTests
+public class MiddlewareTests
 {
 	[Fact]
 	public async Task SendsRequestWhenInvoked()
@@ -15,7 +15,7 @@ public class ecoAPMMiddlewareTests
 		var timer = Substitute.For<ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
-		var middleware = new ecoAPMMiddleware(next, agent, () => timer);
+		var middleware = new Middleware(next, agent, () => timer);
 
 		//act
 		await middleware.Invoke(context);
@@ -32,7 +32,7 @@ public class ecoAPMMiddlewareTests
 		var timer = Substitute.For<ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
-		var middleware = new ecoAPMMiddleware(next, agent, () => timer);
+		var middleware = new Middleware(next, agent, () => timer);
 
 		//act
 		await middleware.Invoke(context);
@@ -52,7 +52,7 @@ public class ecoAPMMiddlewareTests
 		var length = 0.0;
 		timer.CurrentTime.Returns(123);
 		agent.When(a => a.Send(Arg.Any<Request>())).Do(c => length = ((Request)c.Args().First()).Length);
-		var middleware = new ecoAPMMiddleware(next, agent, () => timer);
+		var middleware = new Middleware(next, agent, () => timer);
 
 		//act
 		await middleware.Invoke(context);
@@ -72,7 +72,7 @@ public class ecoAPMMiddlewareTests
 		var time = new DateTime();
 		timer.CurrentTime.Returns(123);
 		agent.When(a => a.Send(Arg.Any<Request>())).Do(c => time = ((Request)c.Args().First()).Time);
-		var middleware = new ecoAPMMiddleware(next, agent, () => timer);
+		var middleware = new Middleware(next, agent, () => timer);
 
 		//act
 		await middleware.Invoke(context);
