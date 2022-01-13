@@ -4,7 +4,7 @@ namespace ecoAPM.Agent.Tests;
 
 internal class MockHttpMessageHandler : HttpMessageHandler
 {
-	public bool Posted { get; private set; }
+	public HttpContent? Posted { get; private set; }
 	private readonly HttpStatusCode _response;
 
 	public MockHttpMessageHandler(HttpStatusCode response = HttpStatusCode.OK)
@@ -13,7 +13,7 @@ internal class MockHttpMessageHandler : HttpMessageHandler
 	protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 	{
 		if (request.Method == HttpMethod.Post)
-			Posted = true;
+			Posted = request.Content;
 
 		var msg = new HttpResponseMessage(_response);
 		return await Task.FromResult(msg);

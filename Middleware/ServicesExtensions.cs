@@ -6,6 +6,8 @@ namespace ecoAPM.Middleware;
 
 public static class ServicesExtensions
 {
+	/// <summary>Add ecoAPM's services to the service collection</summary>
+	/// <param name="services">The application's service collection</param>
 	public static void AddEcoAPM(this IServiceCollection services)
 	{
 		services.AddHttpClient<IAgent, QueuedAgent>();

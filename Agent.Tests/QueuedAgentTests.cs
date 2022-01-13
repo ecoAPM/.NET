@@ -21,7 +21,7 @@ public class QueuedAgentTests
 		await agent.Send(request);
 
 		//assert
-		Assert.Contains(request, agent.GetRequestsToSend());
+		Assert.Contains(request, agent.GetOutstandingRequests());
 	}
 
 	[Fact]
@@ -37,7 +37,7 @@ public class QueuedAgentTests
 		agent.Dispose();
 
 		//assert
-		var leftover = agent.GetRequestsToSend();
+		var leftover = agent.GetOutstandingRequests();
 		Assert.Empty(leftover);
 	}
 
@@ -45,13 +45,17 @@ public class QueuedAgentTests
 	public async Task PostContentContainsAllRequests()
 	{
 		//arrange
-		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var http = new MockHttpMessageHandler();
+		var httpClient = new HttpClient(http);
+		var agent = new QueuedAgent(config, httpClient);
 
 		//act
-		var json = await QueuedAgent.GetPostContent(requests).ReadAsStringAsync();
+		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
+		await agent.PostRequests(requests);
 
 		//assert
-		var actions = JsonSerializer.Deserialize<IEnumerable<Request>>(json)!.Select(t => t.Action).ToList();
+		var actions = JsonSerializer.Deserialize<IEnumerable<Request>>(await http.Posted!.ReadAsStringAsync())!.Select(t => t.Action).ToList();
 		Assert.Contains("a1", actions);
 		Assert.Contains("a2", actions);
 	}
@@ -66,10 +70,10 @@ public class QueuedAgentTests
 		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 
 		//act
-		await agent.SendRequests(requests);
+		await agent.PostRequests(requests);
 
 		//assert
-		Assert.True(http.Posted);
+		Assert.NotNull(http.Posted);
 	}
 
 	[Fact]
@@ -89,10 +93,10 @@ public class QueuedAgentTests
 
 		//act
 		var toSend = new[] { r1, r2 };
-		await agent.SendRequests(toSend);
+		await agent.PostRequests(toSend);
 
 		//assert
-		var remaining = agent.GetRequestsToSend();
+		var remaining = agent.GetOutstandingRequests();
 		Assert.DoesNotContain(r1, remaining);
 		Assert.DoesNotContain(r2, remaining);
 		Assert.Contains(r3, remaining);
@@ -113,13 +117,13 @@ public class QueuedAgentTests
 	}
 
 	[Fact]
-	public void SenderStopsOnDispose()
+	public async Task SenderStopsOnDispose()
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.Zero);
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient);
-		agent.Send(new Request());
+		await agent.Send(new Request());
 
 		//act
 		agent.Dispose();
@@ -140,7 +144,7 @@ public class QueuedAgentTests
 		var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
 
 		//act
-		await agent.SendRequests(new [] { new Request() });
+		await agent.PostRequests(new [] { new Request() });
 
 		//assert
 		var log = logger.Output.ToString();
@@ -159,7 +163,7 @@ public class QueuedAgentTests
 		var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
 
 		//act
-		await agent.SendRequests(new [] { new Request() });
+		await agent.PostRequests(new [] { new Request() });
 
 		//assert
 		var log = logger.Output.ToString();

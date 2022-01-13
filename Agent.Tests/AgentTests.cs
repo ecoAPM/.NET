@@ -80,20 +80,23 @@ public class AgentTests
 		await agent.Send(new Request());
 
 		//assert
-		Assert.True(http.Posted);
+		Assert.NotNull(http.Posted);
 	}
 
 	[Fact]
 	public async Task RequestCanConvertToJSON()
 	{
 		//arrange
-		var request = new Request { Action = "a1" };
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var http = new MockHttpMessageHandler();
+		var agent = new Agent(config, new HttpClient(http));
 
 		//act
-		var json = await Agent.GetPostContent(request).ReadAsStringAsync();
+		var request = new Request { Action = "a1" };
+		await agent.Send(request);
 
 		//assert
-		Assert.Equal("a1", JsonSerializer.Deserialize<Request>(json)!.Action);
+		Assert.Equal("a1", JsonSerializer.Deserialize<Request>(await http.Posted!.ReadAsStringAsync())!.Action);
 	}
 
 	[Fact]

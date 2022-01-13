@@ -5,12 +5,19 @@ using Microsoft.Extensions.Logging;
 
 namespace ecoAPM.Agent;
 
-public class Agent : IAgent
+/// <summary>
+/// Sends single requests to an ecoAPM server
+/// </summary>
+public class Agent : IAgent, IDisposable
 {
 	protected readonly Uri _requestURL;
 	protected readonly HttpClient _httpClient;
 	protected readonly ILogger? _logger;
 
+	/// <summary>Creates a new agent</summary>
+	/// <param name="config">The configuration to use to connect to the server</param>
+	/// <param name="httpClient">The HTTP client to send requests via</param>
+	/// <param name="loggerFactory">The logger for logging detailed information about communications</param>
 	public Agent(IServerConfig config, HttpClient httpClient, ILoggerFactory? loggerFactory = null)
 	{
 		_requestURL = new Uri(config.BaseURL + "requests");
@@ -19,9 +26,6 @@ public class Agent : IAgent
 		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
 		_logger = loggerFactory?.CreateLogger("ecoAPM");
 	}
-
-	public static HttpContent GetPostContent(Request request)
-		=> new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
 
 	public virtual async Task Send(Request request)
 	{
@@ -39,6 +43,9 @@ public class Agent : IAgent
 			_logger?.Log(LogLevel.Warning, ex, "Failed to send request");
 		}
 	}
+
+	private static HttpContent GetPostContent(Request request)
+		=> new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
 
 	public void Dispose()
 	{
