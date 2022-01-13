@@ -14,7 +14,7 @@ public class ServicesExtensionsTests
 		var config = new ConfigurationBuilder().Build();
 
 		//act
-		di.AddEcoAPM(config);
+		di.AddEcoAPM();
 
 		//assert
 		Assert.Contains(typeof(Middleware), di.Select(d => d.ImplementationType));

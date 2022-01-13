@@ -1,7 +1,7 @@
 using ecoAPM.NET.CoreMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddEcoAPM(builder.Configuration);
+builder.Services.AddEcoAPM();
 
 var app = builder.Build();
 app.UseEcoAPM();
