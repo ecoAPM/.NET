@@ -6,7 +6,7 @@ namespace ecoAPM.Agent;
 public class ServerConfig : IServerConfig
 {
 	public Uri BaseURL { get; }
-	public Guid APIKey { get; }
+	public string APIKey { get; }
 	public TimeSpan Interval { get; }
 
 	/// <summary>Configures the connection using environment variables</summary>
@@ -29,7 +29,7 @@ public class ServerConfig : IServerConfig
 	/// <param name="apiKey">The API key that authorizes sending data</param>
 	/// <param name="interval">The interval to send data to the server at</param>
 	public ServerConfig(string? baseURL, string? apiKey, string? interval = null)
-		: this(new Uri(baseURL ?? envBaseURL), new Guid(apiKey ?? envAPIKey), GetInterval(interval ?? envInterval))
+		: this(new Uri(baseURL ?? envBaseURL), apiKey ?? envAPIKey, GetInterval(interval ?? envInterval))
 	{
 	}
 
@@ -37,10 +37,10 @@ public class ServerConfig : IServerConfig
 	/// <param name="baseURL">The base URL of the ecoAPM server</param>
 	/// <param name="apiKey">The API key that authorizes sending data</param>
 	/// <param name="interval">The interval to send data to the server at</param>
-	public ServerConfig(Uri? baseURL, Guid? apiKey, TimeSpan? interval = null)
+	public ServerConfig(Uri? baseURL, string? apiKey, TimeSpan? interval = null)
 	{
 		BaseURL = baseURL ?? new Uri(envBaseURL);
-		APIKey = apiKey ?? new Guid(envAPIKey);
+		APIKey = apiKey ?? envAPIKey;
 		Interval = interval ?? GetInterval(envInterval) ?? DefaultInterval;
 	}
 

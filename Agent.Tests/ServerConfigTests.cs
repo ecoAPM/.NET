@@ -11,9 +11,9 @@ public class ServerConfigTests
 	{
 		//arrange
 		var url = "http://localhost/123";
-		var apiKey = Guid.NewGuid();
+		var apiKey = Guid.NewGuid().ToString();
 		Environment.SetEnvironmentVariable("ecoAPM_BaseURL", url);
-		Environment.SetEnvironmentVariable("ecoAPM_APIKey", apiKey.ToString());
+		Environment.SetEnvironmentVariable("ecoAPM_APIKey", apiKey);
 
 		//act
 		var config = new ServerConfig();
@@ -28,10 +28,10 @@ public class ServerConfigTests
 	{
 		//arrange
 		var url = "http://localhost/123";
-		var apiKey = Guid.NewGuid();
+		var apiKey = Guid.NewGuid().ToString();
 
 		//act
-		var config = new ServerConfig(url, apiKey.ToString());
+		var config = new ServerConfig(url, apiKey);
 
 		//assert
 		Assert.Equal(url, config.BaseURL.AbsoluteUri);
@@ -43,7 +43,7 @@ public class ServerConfigTests
 	{
 		//arrange
 		var url = new Uri("http://localhost/123");
-		var apiKey = Guid.NewGuid();
+		var apiKey = Guid.NewGuid().ToString();
 
 		//act
 		var config = new ServerConfig(url, apiKey);
@@ -58,14 +58,14 @@ public class ServerConfigTests
 	{
 		//arrange
 		var url = "http://localhost/123";
-		var apiKey = Guid.NewGuid();
+		var apiKey = Guid.NewGuid().ToString();
 		var baseConfig = new ConfigurationBuilder();
 		var configSource = new MemoryConfigurationSource
 		{
 			InitialData = new Dictionary<string, string>
 			{
 				{ "ecoAPM_BaseURL", url },
-				{ "ecoAPM_APIKey", apiKey.ToString() }
+				{ "ecoAPM_APIKey", apiKey }
 			}
 		};
 		baseConfig.Add(configSource);
@@ -83,14 +83,14 @@ public class ServerConfigTests
 	{
 		//arrange
 		var url = "http://localhost/123";
-		var apiKey = Guid.NewGuid();
+		var apiKey = Guid.NewGuid().ToString();
 		var baseConfig = new ConfigurationBuilder();
 		var configSource = new MemoryConfigurationSource
 		{
 			InitialData = new Dictionary<string, string>
 			{
 				{ "ecoAPM:BaseURL", url },
-				{ "ecoAPM:APIKey", apiKey.ToString() }
+				{ "ecoAPM:APIKey", apiKey }
 			}
 		};
 		baseConfig.Add(configSource);
