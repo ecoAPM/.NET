@@ -21,8 +21,8 @@ public class Request
 	/// <summary>The result of the request</summary>
 	public string? Result { get; set; }
 
-	/// <summary>The duration of the request</summary>
-	public double Length { get; set; }
+	/// <summary>The duration of the request in milliseconds</summary>
+	public double Duration { get; set; }
 
 	/// <summary>Any additional context that may be helpful when reviewing request data</summary>
 	public string? Context { get; set; }

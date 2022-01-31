@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ecoAPM.Agent;
 using Microsoft.AspNetCore.Http;
 
@@ -50,6 +51,6 @@ public class Middleware
 			Result = httpContext.Response.StatusCode.ToString(),
 			Context = httpContext.TraceIdentifier,
 			Time = start,
-			Length = time
+			Duration = time
 		};
 }
