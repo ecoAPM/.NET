@@ -42,23 +42,23 @@ public class MiddlewareTests
 	}
 
 	[Fact]
-	public async Task ReportsLengthFromTimer()
+	public async Task ReportsDurationFromTimer()
 	{
 		//arrange
 		var next = Substitute.For<RequestDelegate>();
 		var timer = Substitute.For<ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
-		var length = 0.0;
+		var duration = 0.0;
 		timer.CurrentTime.Returns(123);
-		agent.When(a => a.Send(Arg.Any<Request>())).Do(c => length = ((Request)c.Args().First()).Length);
+		agent.When(a => a.Send(Arg.Any<Request>())).Do(c => duration = ((Request)c.Args().First()).Duration);
 		var middleware = new Middleware(next, agent, () => timer);
 
 		//act
 		await middleware.Invoke(context);
 
 		//assert
-		Assert.Equal(123, length);
+		Assert.Equal(123, duration);
 	}
 
 	[Fact]
