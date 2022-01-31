@@ -7,7 +7,7 @@ public interface IServerConfig
 	Uri BaseURL { get; }
 
 	/// <summary>The API key that authorizes sending data</summary>
-	Guid APIKey { get; }
+	string APIKey { get; }
 
 	/// <summary>The interval to send data to the server at</summary>
 	TimeSpan Interval { get; }

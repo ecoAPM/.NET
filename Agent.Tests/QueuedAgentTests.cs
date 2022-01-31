@@ -12,7 +12,7 @@ public class QueuedAgentTests
 	public async Task SendAddsRequestToQueue()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient);
 		var request = new Request();
@@ -27,7 +27,7 @@ public class QueuedAgentTests
 	[Fact]
 	public async Task RequestQueueIsClearedOnDispose()
 	{
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var http = new MockHttpMessageHandler();
 		var httpClient = new HttpClient(http);
 		var agent = new QueuedAgent(config, httpClient);
@@ -45,7 +45,7 @@ public class QueuedAgentTests
 	public async Task PostContentContainsAllRequests()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var http = new MockHttpMessageHandler();
 		var httpClient = new HttpClient(http);
 		var agent = new QueuedAgent(config, httpClient);
@@ -64,7 +64,7 @@ public class QueuedAgentTests
 	public async Task SendRequestsCallsHttpPost()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var http = new MockHttpMessageHandler();
 		var agent = new QueuedAgent(config, new HttpClient(http));
 		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
@@ -80,7 +80,7 @@ public class QueuedAgentTests
 	public async Task SendRemovesSentRequestsFromQueue()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var http = new MockHttpMessageHandler();
 		var httpClient = new HttpClient(http);
 		var agent = new QueuedAgent(config, httpClient);
@@ -106,7 +106,7 @@ public class QueuedAgentTests
 	public void SenderStartedOnConstruction()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var httpClient = Substitute.For<HttpClient>();
 
 		//act
@@ -120,7 +120,7 @@ public class QueuedAgentTests
 	public async Task SenderStopsOnDispose()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid(), TimeSpan.Zero);
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.Zero);
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient);
 		await agent.Send(new Request());
@@ -136,7 +136,7 @@ public class QueuedAgentTests
 	public async Task ErrorLogsWarning()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid(), TimeSpan.MaxValue);
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
 		var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
 		var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
@@ -155,7 +155,7 @@ public class QueuedAgentTests
 	public async Task SuccessDoesNotLogWarning()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var http = new MockHttpMessageHandler();
 		var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();

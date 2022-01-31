@@ -13,7 +13,7 @@ public class AgentTests
 	public void RequestUrlCombinedCorrectlyWithSlashInBase()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var httpClient = Substitute.For<HttpClient>();
 
 		//act
@@ -27,7 +27,7 @@ public class AgentTests
 	public void RequestUrlCombinedCorrectlyWithoutSlashInBase()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString());
 		var httpClient = Substitute.For<HttpClient>();
 
 		//act
@@ -42,7 +42,7 @@ public class AgentTests
 	{
 		//arrange
 		var apiKey = Guid.NewGuid();
-		var config = new ServerConfig(new Uri("http://localhost/"), apiKey);
+		var config = new ServerConfig(new Uri("http://localhost/"), apiKey.ToString());
 		var httpClient = Substitute.For<HttpClient>();
 
 		//act
@@ -57,7 +57,7 @@ public class AgentTests
 	public void HttpClientIsDisposedOnDispose()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var httpClient = Substitute.For<HttpClient>();
 		var agent = new StubAgent(config, httpClient);
 
@@ -72,7 +72,7 @@ public class AgentTests
 	public async Task SendPerformsHttpPost()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var http = new MockHttpMessageHandler();
 		var agent = new Agent(config, new HttpClient(http));
 
@@ -87,7 +87,7 @@ public class AgentTests
 	public async Task RequestCanConvertToJSON()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var http = new MockHttpMessageHandler();
 		var agent = new Agent(config, new HttpClient(http));
 
@@ -103,7 +103,7 @@ public class AgentTests
 	public async Task ErrorLogsWarning()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
 		var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
@@ -122,7 +122,7 @@ public class AgentTests
 	public async Task SuccessDoesNotLogWarning()
 	{
 		//arrange
-		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid());
+		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
 		var http = new MockHttpMessageHandler();
 		var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
