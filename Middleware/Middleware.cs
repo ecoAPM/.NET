@@ -49,7 +49,7 @@ public class Middleware
 			Source = httpContext.Request.Host.Value,
 			Action = httpContext.Request.Path.Value,
 			Result = httpContext.Response.StatusCode.ToString(),
-			Context = httpContext.TraceIdentifier,
+			Context = JsonSerializer.Serialize(new { TraceID = httpContext.TraceIdentifier }),
 			Time = start,
 			Duration = time
 		};
