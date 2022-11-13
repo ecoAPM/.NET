@@ -62,7 +62,7 @@ public class ServerConfigTests
 		var baseConfig = new ConfigurationBuilder();
 		var configSource = new MemoryConfigurationSource
 		{
-			InitialData = new Dictionary<string, string>
+			InitialData = new Dictionary<string, string?>
 			{
 				{ "ecoAPM_BaseURL", url },
 				{ "ecoAPM_APIKey", apiKey }
@@ -87,7 +87,7 @@ public class ServerConfigTests
 		var baseConfig = new ConfigurationBuilder();
 		var configSource = new MemoryConfigurationSource
 		{
-			InitialData = new Dictionary<string, string>
+			InitialData = new Dictionary<string, string?>
 			{
 				{ "ecoAPM:BaseURL", url },
 				{ "ecoAPM:APIKey", apiKey }
