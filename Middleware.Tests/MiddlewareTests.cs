@@ -12,7 +12,7 @@ public class MiddlewareTests
 	{
 		//arrange
 		var next = Substitute.For<RequestDelegate>();
-		var timer = Substitute.For<ITimer>();
+		var timer = Substitute.For<ecoAPM.Agent.ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
 		var middleware = new Middleware(next, agent, () => timer);
@@ -29,7 +29,7 @@ public class MiddlewareTests
 	{
 		//arrange
 		var next = Substitute.For<RequestDelegate>();
-		var timer = Substitute.For<ITimer>();
+		var timer = Substitute.For<ecoAPM.Agent.ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
 		var middleware = new Middleware(next, agent, () => timer);
@@ -46,7 +46,7 @@ public class MiddlewareTests
 	{
 		//arrange
 		var next = Substitute.For<RequestDelegate>();
-		var timer = Substitute.For<ITimer>();
+		var timer = Substitute.For<ecoAPM.Agent.ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
 		var duration = 0.0;
@@ -66,7 +66,7 @@ public class MiddlewareTests
 	{
 		//arrange
 		var next = Substitute.For<RequestDelegate>();
-		var timer = Substitute.For<ITimer>();
+		var timer = Substitute.For<ecoAPM.Agent.ITimer>();
 		var agent = Substitute.For<IAgent>();
 		var context = Substitute.For<HttpContext>();
 		var time = new DateTime();

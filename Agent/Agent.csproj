@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>0.4.0</Version>
+		<Version>0.5.0</Version>
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<Authors>ecoAPM LLC</Authors>
 		<Company>ecoAPM LLC</Company>
@@ -22,10 +22,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="all"/>
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0"/>
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1"/>
-		<PackageReference Include="System.Text.Json" Version="7.0.3"/>
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0"/>
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all"/>
+		<PackageReference Include="System.Text.Json" Version="8.0.0"/>
 		<None Include="../README.md" CopyToOutputDirectory="PreserveNewest" Pack="true" PackagePath="."/>
 	</ItemGroup>
 
