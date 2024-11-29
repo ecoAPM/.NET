@@ -7,4 +7,5 @@ public interface ITimer
 	void Start();
 	void Stop();
 	double Time(Action action);
+	Task<double> Time(Task task);
 }

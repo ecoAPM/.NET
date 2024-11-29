@@ -23,6 +23,17 @@ public class Timer : ITimer
 		return CurrentTime;
 	}
 
+	/// <summary>Times a given task</summary>
+	/// <param name="task">The task to time</param>
+	/// <returns>The number of milliseconds the task took</returns>
+	public async Task<double> Time(Task task)
+	{
+		Start();
+		await task;
+		Stop();
+		return CurrentTime;
+	}
+
 	/// <summary>Starts the timer</summary>
 	public void Start() => _stopwatch.Start();
 
