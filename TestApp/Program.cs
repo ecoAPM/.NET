@@ -13,4 +13,4 @@ app.MapGet("/slow", async () =>
 	return "HellaSlow, world!";
 });
 
-app.Run();
+await app.RunAsync();
