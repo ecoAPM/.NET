@@ -31,7 +31,7 @@ public class Agent : IAgent, IDisposable
 	{
 		try
 		{
-			_logger?.Log(LogLevel.Debug, $"Sending request to {_requestURL}");
+			_logger?.Log(LogLevel.Debug, "Sending request to {URL}", _requestURL);
 			var response = await _httpClient.PostAsync(_requestURL, GetPostContent(request));
 			if (!response.IsSuccessStatusCode)
 			{

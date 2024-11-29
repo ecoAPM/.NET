@@ -56,7 +56,7 @@ public class QueuedAgent : Agent
 		_sending = true;
 		try
 		{
-			_logger?.Log(LogLevel.Debug, $"Sending {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
+			_logger?.Log(LogLevel.Debug, "Sending {count} request{s} to {URL}", requests.Count, requests.Count > 1 ? "s" : "", _requestURL);
 			var content = GetPostContent(requests);
 			var response = await _httpClient.PostAsync(_requestURL, content);
 			if (!response.IsSuccessStatusCode)
@@ -65,7 +65,7 @@ public class QueuedAgent : Agent
 			}
 
 			_requestQueue.RemoveAll(requests.Contains);
-			_logger?.Log(LogLevel.Information, $"Sent {requests.Count} request{(requests.Count > 1 ? "s" : "")} to {_requestURL}");
+			_logger?.Log(LogLevel.Information, "Sent {count} request{s} to {URL}", requests.Count, requests.Count > 1 ? "s" : "", _requestURL);
 		}
 		catch (Exception ex)
 		{
