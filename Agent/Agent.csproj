@@ -7,7 +7,7 @@
 		<Nullable>enable</Nullable>
 		<RootNamespace>ecoAPM.Agent</RootNamespace>
 		<IsPackable>true</IsPackable>
-		<Version>0.5.0</Version>
+		<Version>0.5.1</Version>
 		<Authors>ecoAPM LLC</Authors>
 		<Company>ecoAPM LLC</Company>
 		<Copyright>ecoAPM LLC</Copyright>

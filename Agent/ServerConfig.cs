@@ -18,9 +18,9 @@ public class ServerConfig : IServerConfig
 	/// <summary>Configures the connection using a pre-defined configuration</summary>
 	/// <param name="config">The configuration to use</param>
 	public ServerConfig(IConfiguration config)
-		: this(config["ecoAPM:BaseURL"] ?? config["ecoAPM_BaseURL"] ?? envBaseURL,
-			config["ecoAPM:APIKey"] ?? config["ecoAPM_APIKey"] ?? envAPIKey,
-			config["ecoAPM:Interval"] ?? config["ecoAPM_Interval"] ?? envInterval)
+		: this(config["ecoAPM:BaseURL"] ?? config["ecoAPM_BaseURL"],
+			config["ecoAPM:APIKey"] ?? config["ecoAPM_APIKey"],
+			config["ecoAPM:Interval"] ?? config["ecoAPM_Interval"])
 	{
 	}
 
@@ -29,7 +29,11 @@ public class ServerConfig : IServerConfig
 	/// <param name="apiKey">The API key that authorizes sending data</param>
 	/// <param name="interval">The interval to send data to the server at</param>
 	public ServerConfig(string? baseURL, string? apiKey, string? interval = null)
-		: this(new Uri(baseURL ?? envBaseURL), apiKey ?? envAPIKey, GetInterval(interval ?? envInterval))
+		: this(
+			GetBaseURL(baseURL ?? envBaseURL),
+			GetAPIKey(apiKey ?? envAPIKey),
+			GetInterval(interval ?? envInterval)
+		)
 	{
 	}
 
@@ -39,17 +43,24 @@ public class ServerConfig : IServerConfig
 	/// <param name="interval">The interval to send data to the server at</param>
 	public ServerConfig(Uri? baseURL, string? apiKey, TimeSpan? interval = null)
 	{
-		BaseURL = baseURL ?? new Uri(envBaseURL);
-		APIKey = apiKey ?? envAPIKey;
+		BaseURL = baseURL ?? GetBaseURL(envBaseURL);
+		APIKey = apiKey ?? GetAPIKey(envAPIKey);
 		Interval = interval ?? GetInterval(envInterval) ?? DefaultInterval;
 	}
 
+	private static Uri GetBaseURL(string baseURL)
+		=> Uri.TryCreate(baseURL, UriKind.Absolute, out var baseURI)
+			? baseURI
+			: throw new ArgumentNullException(nameof(baseURL), "ecoAPM base URL not set!");
+
+	private static string GetAPIKey(string? apiKey)
+		=> apiKey
+		   ?? throw new ArgumentNullException(nameof(apiKey), "ecoAPM API Key not set!");
+
 	private static TimeSpan? GetInterval(string seconds)
-	{
-		return ushort.TryParse(seconds, out var num)
+		=> ushort.TryParse(seconds, out var num)
 			? TimeSpan.FromSeconds(num)
 			: null;
-	}
 
 	private static string envBaseURL => Environment.GetEnvironmentVariable("ecoAPM_BaseURL") ?? string.Empty;
 	private static string envAPIKey => Environment.GetEnvironmentVariable("ecoAPM_APIKey") ?? string.Empty;

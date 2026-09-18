@@ -22,7 +22,7 @@ public class Agent : IAgent, IDisposable
 	{
 		_requestURL = new Uri(config.BaseURL + "requests");
 		_httpClient = httpClient;
-		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(config.APIKey.ToString()));
+		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(config.APIKey));
 		_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", base64);
 		_logger = loggerFactory?.CreateLogger("ecoAPM");
 	}
