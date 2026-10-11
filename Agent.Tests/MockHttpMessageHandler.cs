@@ -15,7 +15,7 @@ internal class MockHttpMessageHandler : HttpMessageHandler
 		if (request.Method == HttpMethod.Post)
 			Posted = request.Content;
 
-		var msg = new HttpResponseMessage(_response);
+		using var msg = new HttpResponseMessage(_response);
 		return await Task.FromResult(msg);
 	}
 }

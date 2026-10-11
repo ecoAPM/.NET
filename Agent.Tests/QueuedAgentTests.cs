@@ -13,8 +13,8 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var httpClient = Substitute.For<HttpClient>();
-		var agent = new QueuedAgent(config, httpClient);
+		using var httpClient = Substitute.For<HttpClient>();
+		using var agent = new QueuedAgent(config, httpClient);
 		var request = new Request();
 
 		//act
@@ -28,8 +28,8 @@ public class QueuedAgentTests
 	public async Task RequestQueueIsClearedOnDispose()
 	{
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var http = new MockHttpMessageHandler();
-		var httpClient = new HttpClient(http);
+		using var http = new MockHttpMessageHandler();
+		using var httpClient = new HttpClient(http);
 		var agent = new QueuedAgent(config, httpClient);
 		await agent.Send(new Request());
 
@@ -46,16 +46,17 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var http = new MockHttpMessageHandler();
-		var httpClient = new HttpClient(http);
-		var agent = new QueuedAgent(config, httpClient);
+		using var http = new MockHttpMessageHandler();
+		using var httpClient = new HttpClient(http);
+		using var agent = new QueuedAgent(config, httpClient);
 
 		//act
 		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 		await agent.PostRequests(requests);
 
 		//assert
-		var actions = JsonSerializer.Deserialize<IEnumerable<Request>>(await http.Posted!.ReadAsStringAsync())!.Select(t => t.Action).ToList();
+		var content = await http.Posted!.ReadAsStringAsync();
+		var actions = JsonSerializer.Deserialize<IEnumerable<Request>>(content)!.Select(t => t.Action).ToArray();
 		Assert.Contains("a1", actions);
 		Assert.Contains("a2", actions);
 	}
@@ -65,8 +66,8 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var http = new MockHttpMessageHandler();
-		var agent = new QueuedAgent(config, new HttpClient(http));
+		using var http = new MockHttpMessageHandler();
+		using var agent = new QueuedAgent(config, new HttpClient(http));
 		var requests = new[] { new Request { Action = "a1" }, new Request { Action = "a2" } };
 
 		//act
@@ -81,9 +82,9 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var http = new MockHttpMessageHandler();
-		var httpClient = new HttpClient(http);
-		var agent = new QueuedAgent(config, httpClient);
+		using var http = new MockHttpMessageHandler();
+		using var httpClient = new HttpClient(http);
+		using var agent = new QueuedAgent(config, httpClient);
 		var r1 = new Request { Action = "a1" };
 		var r2 = new Request { Action = "a2" };
 		var r3 = new Request { Action = "a3" };
@@ -107,10 +108,10 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 
 		//act
-		var agent = new QueuedAgent(config, httpClient);
+		using var agent = new QueuedAgent(config, httpClient);
 
 		//assert
 		Assert.True(agent.IsRunning);
@@ -121,7 +122,7 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString(), TimeSpan.Zero);
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 		var agent = new QueuedAgent(config, httpClient);
 		await agent.Send(new Request());
 
@@ -137,14 +138,14 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString(), TimeSpan.MaxValue);
-		var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
-		var loggerFactory = Substitute.For<ILoggerFactory>();
+		using var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
+		using var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
 		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
-		var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
+		using var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
 
 		//act
-		await agent.PostRequests(new [] { new Request() });
+		await agent.PostRequests([new Request()]);
 
 		//assert
 		var log = logger.Output.ToString();
@@ -156,14 +157,14 @@ public class QueuedAgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var http = new MockHttpMessageHandler();
-		var loggerFactory = Substitute.For<ILoggerFactory>();
+		using var http = new MockHttpMessageHandler();
+		using var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
 		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
-		var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
+		using var agent = new QueuedAgent(config, new HttpClient(http), loggerFactory);
 
 		//act
-		await agent.PostRequests(new [] { new Request() });
+		await agent.PostRequests([new Request()]);
 
 		//assert
 		var log = logger.Output.ToString();

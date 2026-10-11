@@ -7,7 +7,7 @@ namespace ecoAPM.Agent;
 /// <summary>Sends batched requests to an ecoAPM server</summary>
 public class QueuedAgent : Agent
 {
-	private readonly List<Request> _requestQueue = new();
+	private readonly List<Request> _requestQueue = [];
 	private readonly TimeSpan _sendInterval;
 
 	/// <summary>Returns if the agent is currently running</summary>
@@ -39,8 +39,8 @@ public class QueuedAgent : Agent
 
 	/// <summary>Retrieves any requests that still need to be sent</summary>
 	/// <returns>The outstanding requests</returns>
-	public IReadOnlyCollection<Request> GetOutstandingRequests()
-		=> _requestQueue.ToArray();
+	public Request[] GetOutstandingRequests()
+		=> [.. _requestQueue];
 
 	/// <summary>Adds a request to the queue to be sent</summary>
 	/// <param name="request">The request to send</param>
@@ -51,16 +51,15 @@ public class QueuedAgent : Agent
 
 	/// <summary>Sends a batch of requests to the configured ecoAPM server</summary>
 	/// <param name="requests">The requests to send</param>
-	public async Task PostRequests(IReadOnlyCollection<Request> requests)
+	public async Task PostRequests(Request[] requests)
 	{
 		_sending = true;
 		try
 		{
-			var count = requests.Count;
+			var count = requests.Length;
 			var noun = count == 1 ? "request" : "requests";
 			_logger?.Log(LogLevel.Debug, "Sending {Count} {Requests} to {URL}", count, noun, _requestURL);
-			var content = GetPostContent(requests);
-			var response = await _httpClient.PostAsync(_requestURL, content);
+			using var response = await _httpClient.PostAsync(_requestURL, GetPostContent(requests));
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException($"Requests were not accepted: {(int)response.StatusCode} {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
@@ -79,7 +78,7 @@ public class QueuedAgent : Agent
 		}
 	}
 
-	private static HttpContent GetPostContent(IEnumerable<Request> requests)
+	private static HttpContent GetPostContent(Request[] requests)
 		=> new StringContent(JsonSerializer.Serialize(requests), Encoding.UTF8, "application/json");
 
 	protected override void Dispose(bool disposing)

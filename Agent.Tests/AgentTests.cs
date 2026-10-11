@@ -14,10 +14,10 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 
 		//act
-		var agent = new StubAgent(config, httpClient);
+		using var agent = new StubAgent(config, httpClient);
 
 		//assert
 		Assert.Equal("http://localhost/requests", agent.RequestUrl.AbsoluteUri);
@@ -28,10 +28,10 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost"), Guid.NewGuid().ToString());
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 
 		//act
-		var agent = new StubAgent(config, httpClient);
+		using var agent = new StubAgent(config, httpClient);
 
 		//assert
 		Assert.Equal("http://localhost/requests", agent.RequestUrl.AbsoluteUri);
@@ -43,10 +43,10 @@ public class AgentTests
 		//arrange
 		var apiKey = Guid.NewGuid();
 		var config = new ServerConfig(new Uri("http://localhost/"), apiKey.ToString());
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 
 		//act
-		var agent = new StubAgent(config, httpClient);
+		using var agent = new StubAgent(config, httpClient);
 
 		//assert
 		var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(apiKey.ToString()));
@@ -58,7 +58,7 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var httpClient = Substitute.For<HttpClient>();
+		using var httpClient = Substitute.For<HttpClient>();
 		var agent = new StubAgent(config, httpClient);
 
 		//act
@@ -73,8 +73,8 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var http = new MockHttpMessageHandler();
-		var agent = new Agent(config, new HttpClient(http));
+		using var http = new MockHttpMessageHandler();
+		using var agent = new Agent(config, new HttpClient(http));
 
 		//act
 		await agent.Send(new Request());
@@ -88,8 +88,8 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var http = new MockHttpMessageHandler();
-		var agent = new Agent(config, new HttpClient(http));
+		using var http = new MockHttpMessageHandler();
+		using var agent = new Agent(config, new HttpClient(http));
 
 		//act
 		var request = new Request { Action = "a1" };
@@ -104,11 +104,11 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
-		var loggerFactory = Substitute.For<ILoggerFactory>();
+		using var http = new MockHttpMessageHandler(HttpStatusCode.BadRequest);
+		using var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
 		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
-		var agent = new Agent(config, new HttpClient(http), loggerFactory);
+		using var agent = new Agent(config, new HttpClient(http), loggerFactory);
 
 		//act
 		await agent.Send(new Request());
@@ -123,11 +123,11 @@ public class AgentTests
 	{
 		//arrange
 		var config = new ServerConfig(new Uri("http://localhost/"), Guid.NewGuid().ToString());
-		var http = new MockHttpMessageHandler();
-		var loggerFactory = Substitute.For<ILoggerFactory>();
+		using var http = new MockHttpMessageHandler();
+		using var loggerFactory = Substitute.For<ILoggerFactory>();
 		var logger = new MockLogger();
 		loggerFactory.CreateLogger(Arg.Any<string>()).Returns(logger);
-		var agent = new Agent(config, new HttpClient(http), loggerFactory);
+		using var agent = new Agent(config, new HttpClient(http), loggerFactory);
 
 		//act
 		await agent.Send(new Request());

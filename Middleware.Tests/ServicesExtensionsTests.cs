@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
@@ -11,7 +10,6 @@ public class ServicesExtensionsTests
 	{
 		//arrange
 		var di = new ServiceCollection();
-		var config = new ConfigurationBuilder().Build();
 
 		//act
 		di.AddEcoAPM();

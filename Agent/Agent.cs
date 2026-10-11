@@ -32,7 +32,7 @@ public class Agent : IAgent, IDisposable
 		try
 		{
 			_logger?.Log(LogLevel.Debug, "Sending request to {URL}", _requestURL);
-			var response = await _httpClient.PostAsync(_requestURL, GetPostContent(request));
+			using var response = await _httpClient.PostAsync(_requestURL, GetPostContent(request));
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException($"Requests were not accepted: {(int)response.StatusCode} {response.StatusCode} {await response.Content.ReadAsStringAsync()}");
